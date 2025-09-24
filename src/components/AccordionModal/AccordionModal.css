@@ -1,0 +1,66 @@
+:root {
+    --acc-gap: 2vw;
+    --acc-radius: 14px;
+    --acc-duration: 850ms;
+    --acc-ease: cubic-bezier(.2, .7, .2, 1);
+}
+
+.acc-modal-backdrop {
+    /* position: fixed; */
+    inset: 0;
+    /* top, right, bottom, left = 0 */
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: flex-end;
+    /* push modal to the right */
+    z-index: 1000;
+    /* ensure it’s above other content */
+    transition:
+        flex-basis var(--acc-duration) var(--acc-ease),
+        flex-grow var(--acc-duration) var(--acc-ease),
+        min-width var(--acc-duration) var(--acc-ease),
+        transform 1860ms ease;
+}
+
+.acc-modal-side {
+    position: relative;
+    flex: 1 1 0%;
+    flex: 7;
+    min-width: var(--min-collapsed, 40px);
+    background: #fff;
+    background: #8ba87c;
+    /* width: calc(max(44vw, 380px)); */
+    /* adjust as needed */
+    /* width: calc(100vw - 252px); */
+    overflow: hidden;
+
+    /* max-width: 100%; */
+    /* don’t overflow small screens */
+    height: 100%;
+    /* full viewport height */
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+    /* overflow-y: auto; */
+    /* scroll if content taller than screen */
+    /* animation: accSlideIn 0.5s ease-in; */
+    display: flex;
+    /* transition:
+        flex-basis var(--acc-duration) var(--acc-ease),
+        flex-grow var(--acc-duration) var(--acc-ease),
+        min-width var(--acc-duration) var(--acc-ease),
+        transform 1860ms ease; */
+    transition:
+        flex-basis 1850ms var(--acc-ease),
+        flex-grow 1850ms var(--acc-ease),
+        min-width 1850ms var(--acc-ease),
+        transform 1860ms ease;
+}
+
+@keyframes accSlideIn {
+    from {
+        transform: translateX(0%);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
