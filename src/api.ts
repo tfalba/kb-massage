@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { isoDaysFromNow, isoNow } from "./helpers/eventFormatter";
 
+type NewType = {name: string; duration: string}
+
 export async function getEventTypes() {
     // const response = await fetch("/api/event-types");
     const response = await fetch("http://localhost:3001/api/event-types");
@@ -84,4 +86,18 @@ export function useAvailability(startISO: string, endISO: string, duration: stri
   }, [startISO, endISO]);
 
   return { data, loading, error };
+}
+
+export async function bookAppointment(start: string, end: string, guestName: string, guestEmail: string, guestPhone: string, typeDuration: string) {
+    const res = await fetch(`http://localhost:4001/gcal/book`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ start, end, guestName, guestEmail, guestPhone, typeDuration}),
+  });
+
+    if (!res.ok) {
+    throw new Error(`Booking failed: ${res.status} ${await res.text()}`);
+  }
+
+  return res.json(); // { ok: true, eventId, htmlLink }
 }

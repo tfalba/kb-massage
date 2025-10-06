@@ -7,7 +7,6 @@ const utc = require("dayjs/plugin/utc");
 const tz = require("dayjs/plugin/timezone");
 const isSameOrBefore = require("dayjs/plugin/isSameOrBefore");
 const isSameOrAfter = require("dayjs/plugin/isSameOrAfter");
-// const isoWeekday = require("dayjs/plugin/isoWeekday");
 const fs = require("fs");
 const fsp = require("fs/promises");
 const path = require("path");
@@ -37,13 +36,6 @@ const {
   SLOT_PADDING_MIN = "10",
   BUSINESS_HOURS_JSON = "[]",
 } = process.env;
-// const {
-//   TIMEZONE = "America/New_York",
-//   SLOT_DURATION_MIN = "60",
-//   SLOT_STEP_MIN = "30",
-//   BUFFER_BEFORE_MIN = "0",
-//   BUFFER_AFTER_MIN = "10",
-// } = process.env;
 
 const oauth2Client = new google.auth.OAuth2(
   GOOGLE_CLIENT_ID,
@@ -71,11 +63,6 @@ function tokensFileExists() {
   try { fs.accessSync(TOKENS_PATH, fs.constants.F_OK); return true; } catch { return false; }
 }
 
-// const oauth2Client = new google.auth.OAuth2(
-//   process.env.GOOGLE_CLIENT_ID,
-//   process.env.GOOGLE_CLIENT_SECRET,
-//   process.env.GOOGLE_REDIRECT_URI
-// );
 
 // Load tokens at boot (if saved previously)
 (async () => {
@@ -135,46 +122,6 @@ app.get("/gcal/oauth2callback", async (req, res) => {
     res.status(500).send("OAuth failed");
   }
 });
-
-// app.get("/gcal/auth/url", (req, res) => {
-//   const url = oauth2Client.generateAuthUrl({
-//     access_type: "offline",
-//     prompt: "consent",
-//     scope: SCOPES,
-//   });
-//   res.json({ url });
-// });
-
-// app.get("/gcal/oauth2callback", async (req, res) => {
-//   try {
-//     const { code } = req.query;
-//     const { tokens } = await oauth2Client.getToken(code);
-//     TOKENS = tokens;
-//     res.send("Google Calendar connected ✅ You can close this tab.");
-//   } catch (e) {
-//     console.error("OAuth error", e);
-//     res.status(500).send("OAuth failed");
-//   }
-// });
-
-// function getAuthedCalendar() {
-//   if (!TOKENS) throw new Error("Not authorized with Google yet.");
-//   oauth2Client.setCredentials(TOKENS);
-//   return google.calendar({ version: "v3", auth: oauth2Client });
-// }
-
-
-// server-gcal/index.js (or wherever your availability route is)
-// const dayjs = require("dayjs");
-// const utc = require("dayjs/plugin/utc");
-// const tz = require("dayjs/plugin/timezone");
-// const isSameOrBefore = require("dayjs/plugin/isSameOrBefore");
-// const isSameOrAfter = require("dayjs/plugin/isSameOrAfter");
-// dayjs.extend(utc); dayjs.extend(tz);
-// dayjs.extend(isSameOrBefore); dayjs.extend(isSameOrAfter);
-
-// ...existing requires and env...
-
 
 // ----- helpers -----
 
@@ -343,117 +290,6 @@ app.get("/gcal/availability", async (req, res) => {
 });
 
 
-// // ----- Availability: generate slots -----
-// function parseBusinessHours() {
-//   try { return JSON.parse(BUSINESS_HOURS_JSON); }
-//   catch { return []; }
-// }
-
-// function* iterateSlots(startISO, endISO, durationMin, padMin) {
-//   const dur = Number(durationMin), pad = Number(padMin);
-//   let t = dayjs.tz(startISO, TIMEZONE);
-//   const end = dayjs.tz(endISO, TIMEZONE);
-//   while (t.add(dur, "minute").isSameOrBefore(end)) {
-//     const s = t;
-//     const e = t.add(dur, "minute");
-//     yield { start: s.toISOString(), end: e.toISOString() };
-//     t = e.add(pad, "minute");
-//   }
-// }
-
-// // Returns availability windows for the date range based on business hours
-// function workingWindows(fromISO, toISO) {
-//   const bh = parseBusinessHours();
-//   const out = [];
-//   let d = dayjs.tz(fromISO, TIMEZONE).startOf("day");
-//   const end = dayjs.tz(toISO, TIMEZONE).endOf("day");
-//   while (d.isSameOrBefore(end)) {
-//     // const dow = d.isoWeekday(); // 1..7 (needs dayjs/plugin/isoWeek? alternative below)
-//     // If isoWeekday plugin not loaded, map: const dow = [7,1,2,3,4,5,6][d.day()];
-//     const jsDow = d.day(); // 0..6 (Sun..Sat)
-//     const isoDow = jsDow === 0 ? 7 : jsDow; // 1..7
-//     for (const w of bh) {
-//       if (w.dow.includes(isoDow)) {
-//         const start = dayjs.tz(
-//           `${d.format("YYYY-MM-DD")}T${w.start}`,
-//           TIMEZONE
-//         );
-//         const end = dayjs.tz(
-//           `${d.format("YYYY-MM-DD")}T${w.end}`,
-//           TIMEZONE
-//         );
-//         out.push({ start: start.toISOString(), end: end.toISOString() });
-//       }
-//     }
-//     d = d.add(1, "day");
-//   }
-//   return out;
-// }
-
-// // app.get("/api/availability", async (req, res) => {
-//     app.get("/gcal/availability", async (req, res) => {
-
-//   try {
-//     const { start, end } = req.query;
-//     if (!start || !end) {
-//       return res.status(400).json({ error: "start and end ISO strings required" });
-//     }
-
-//     const calendar = getAuthedCalendar();
-
-//     // 1) Get busy blocks from Google
-//     const fb = await calendar.freebusy.query({
-//       requestBody: {
-//         timeMin: new Date(start).toISOString(),
-//         timeMax: new Date(end).toISOString(),
-//         items: [{ id: GOOGLE_CALENDAR_ID }],
-//         timeZone: TIMEZONE,
-//       },
-//     });
-
-//     const busy = (fb.data.calendars?.[GOOGLE_CALENDAR_ID]?.busy || [])
-//       .map(b => ({ start: b.start, end: b.end }));
-
-//     // 2) Build working windows, subtract busy, create slots
-//     const windows = workingWindows(start, end);
-//     const slots = [];
-
-//     for (const w of windows) {
-//       // slice this working window by busy intervals
-//       let segments = [{ start: dayjs(w.start), end: dayjs(w.end) }];
-
-//       for (const b of busy) {
-//         const bStart = dayjs(b.start);
-//         const bEnd = dayjs(b.end);
-//         segments = segments.flatMap(seg => {
-//           // no overlap
-//           if (bEnd.isSameOrBefore(seg.start) || bStart.isSameOrAfter(seg.end)) return [seg];
-//           const out = [];
-//           if (bStart.isAfter(seg.start)) out.push({ start: seg.start, end: bStart });
-//           if (bEnd.isBefore(seg.end)) out.push({ start: bEnd, end: seg.end });
-//           return out;
-//         });
-//       }
-
-//       // generate slots inside each free segment
-//       for (const seg of segments) {
-//         for (const s of iterateSlots(seg.start, seg.end, SLOT_DURATION_MIN, SLOT_PADDING_MIN)) {
-//           // Ensure slots are in the future
-//           if (dayjs(s.start).isAfter(dayjs())) {
-//             slots.push(s);
-//           }
-//         }
-//       }
-//     }
-
-//     // Sort and send
-//     slots.sort((a, b) => new Date(a.start) - new Date(b.start));
-//     res.json({ slots, timezone: TIMEZONE, durationMin: Number(SLOT_DURATION_MIN) });
-//   } catch (e) {
-//     console.error("availability error", e);
-//     res.status(500).json({ error: "Failed to compute availability", detail: String(e.message || e) });
-//   }
-// });
 
 // See whether we’re authorized
 app.get("/gcal/auth/status", async (req, res) => {
@@ -486,20 +322,20 @@ app.post("/gcal/auth/disconnect", async (req, res) => {
 });
 
 // ----- Booking: create an event -----
-app.post("/api/book", async (req, res) => {
+app.post("/gcal/book", async (req, res) => {
   try {
-    const { start, end, guest } = req.body;
-    if (!start || !end || !guest?.email) {
+    const { start, end, guestName, guestEmail, guestPhone, typeDuration} = req.body;
+    if (!start || !end || !guestName || !guestEmail) {
       return res.status(400).json({ error: "start, end, guest.email required" });
     }
     const calendar = getAuthedCalendar();
 
     const event = {
-      summary: "Massage Therapy Session",
-      description: `Booked via site.\nGuest: ${guest.name || ""}\nEmail: ${guest.email}`,
+      summary: `${guestName} ${typeDuration}min Massage Session`,
+      description: `Booked via site.\nGuest: ${guestName || ""}\nEmail: ${guestEmail}\nPhone: ${guestPhone}`,
       start: { dateTime: new Date(start).toISOString(), timeZone: TIMEZONE },
-      end:   { dateTime: new Date(end).toISOString(),   timeZone: TIMEZONE },
-      attendees: [{ email: guest.email, displayName: guest.name }],
+      end:   { dateTime: new Date(end).toISOString(), timeZone: TIMEZONE },
+      attendees: [{ email: guestEmail, displayName: guestName}],
       // Optional: Google Meet
       conferenceData: { createRequest: { requestId: `req-${Date.now()}` } },
       reminders: { useDefault: true },
@@ -520,7 +356,7 @@ app.post("/api/book", async (req, res) => {
 });
 
 // ----- Quick health + start -----
-app.get("/api/health", (_, res) => res.json({ ok: true }));
+app.get("/gcal/health", (_, res) => res.json({ ok: true }));
 app.get("/", (_, res) => res.send("Booking server up"));
 
 app.listen(PORT, () => console.log(`Server on http://localhost:${PORT}`));

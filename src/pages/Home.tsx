@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import AccordionGallery from "../components/AccordionGallery/AccordionGallery";
 import { images, quotes } from "../data/AccordionData";
 import ReviewGallery from "../components/ReviewGallery/ReviewGallery";
-import CalendarWithAvailability from "../components/CalendarWithAvailability";
 
 function Home() {
     return (
@@ -22,8 +21,6 @@ function Home() {
                 <Link className='button' to="/about">About me</Link>
             </div>
             <ReviewGallery slides={quotes} minCollapsed={40} spin={false} manualTrip={false} />
-            {/* <CalendarWithAvailability duration="60"/>
-            <CalendarWithAvailability duration="90"/> */}
         </main>
     );
 }

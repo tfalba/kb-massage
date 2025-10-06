@@ -22,11 +22,35 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center; */
-  --rdp-accent-color: white !important;
-  --rdp-today-color: white !important;
-  --rdp-selected-border: white;
+  --rdp-accent-color: #7cac5b !important;
+  --rdp-today-color: #7cac5b !important;
+  --rdp-selected-border: #7cac5b;
+  --rdp-day_button-height: 50px;
+  --rdp-day_button-width: 50px;
 }
 
+.rdp-weekdays {
+  font-size: calc(8px + 1vw);
+}
+
+.rdp-day_button {
+  --rdp-day_button-height: 50px;
+  --rdp-day_button-width: 50px;
+  font-size: calc(8px + 1vw) !important;
+
+}
+
+.rdp-month_caption {
+  font-family: 'Montserrat';
+  font-size: calc(10px + 1vw) !important;
+  justify-content: center;
+  font-weight: 400 !important;
+  height: 50px !important;
+}
+
+.rdp-caption_label {
+  z-index: unset !important;
+}
 
 [id*="onetrust-consent-sdk"] {
   display: none;

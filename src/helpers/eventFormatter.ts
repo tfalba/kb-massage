@@ -73,3 +73,25 @@ export function groupSlotsByDayGoog(slots: {start: string; end: string}[], timeZ
   for (const [, arr] of map) arr.sort((a, b) => +new Date(a.start) - +new Date(b.start));
   return map;
 }
+
+export function groupBookingIntoStandard(slot: {start_time: string, end_time: string}) {
+    const startDate = new Date(slot.start_time);
+  const endDate = new Date(slot.end_time);
+  const startTime = startDate.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+    timeZone: "America/New_York" // <-- important if you want a specific TZ
+  });
+  const endTime = endDate.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+    timeZone: "America/New_York" // <-- important if you want a specific TZ
+  });
+  const date = startDate.getDate();
+  const month = startDate.toLocaleString("en-US", { month: "short" })
+  const year = startDate.getFullYear();
+  return `${month} ${date}, ${year} / ${startTime} - ${endTime} `
+
+}

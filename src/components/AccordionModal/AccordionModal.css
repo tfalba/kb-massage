@@ -22,45 +22,67 @@
         transform 1860ms ease;
 }
 
+.acc-modal-button {
+        /* animation: accSlideIn 0.5s ease-in; */
+
+
+}
 .acc-modal-side {
     position: relative;
     flex: 1 1 0%;
     flex: 7;
     min-width: var(--min-collapsed, 40px);
-    background: #fff;
     background: #8ba87c;
-    /* width: calc(max(44vw, 380px)); */
-    /* adjust as needed */
-    /* width: calc(100vw - 252px); */
     overflow: hidden;
-
-    /* max-width: 100%; */
-    /* don’t overflow small screens */
     height: 100%;
-    /* full viewport height */
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
-    /* overflow-y: auto; */
-    /* scroll if content taller than screen */
-    /* animation: accSlideIn 0.5s ease-in; */
+    animation: accSlideIn 0.5s ease-in;
     display: flex;
-    /* transition:
-        flex-basis var(--acc-duration) var(--acc-ease),
-        flex-grow var(--acc-duration) var(--acc-ease),
-        min-width var(--acc-duration) var(--acc-ease),
-        transform 1860ms ease; */
-    transition:
-        flex-basis 1850ms var(--acc-ease),
-        flex-grow 1850ms var(--acc-ease),
-        min-width 1850ms var(--acc-ease),
-        transform 1860ms ease;
+}
+
+.acc-button-slide {
+        position: relative;
+    flex: 1 1 0%;
+    flex: 7;
+    /* min-width: var(--min-collapsed, 40px); */
+    /* background: #8ba87c; */
+    overflow: hidden;
+    height: 100%;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+        animation: accSlideOut 0.5s ease-out;
+        width: 0;
+        /* opacity: 0; */
+        /* flex: 1; */
+
+}
+
+.acc-button-slide article {
+    opacity: 0;
 }
 
 @keyframes accSlideIn {
     from {
-        transform: translateX(0%);
+        transform: translateX(-20%);
+                /* transform: translateX(inherit); */
+
     }
 
     to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes accSlideOut {
+    from {
         transform: translateX(100%);
+        /* opacity: 1; */
+        /* flex: 1; */
+        width: auto;
+    }
+    to {
+        transform: translateX(0);
+        /* opacity: 0; */
+        /* flex: 7; */
+        width: 0;
     }
 }
