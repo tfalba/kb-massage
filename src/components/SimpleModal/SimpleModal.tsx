@@ -15,7 +15,7 @@ export default function SimpleModal({ children }: { children: React.ReactNode })
         <div style={{ position: 'fixed', top: '0', right: '0'}}>
             <button onClick={openModal} style={{ backgroundColor: '#8ba87c', border: 'none', height: 'calc(max(12vw, 12vh, 105px))' }}>
                 <span style={{
-                    writingMode: 'vertical-rl', width: '40px', placeContent: 'center', fontSize: 'calc(10px + 1vw)', fontFamily: 'Montserrat'
+                    writingMode: 'vertical-rl', width: '40px', placeContent: 'center', fontSize: 'calc(8px + 1vw)', fontFamily: 'Montserrat'
                 }}>Book Now</span>
             </button>
 

@@ -25,10 +25,28 @@ export const services = [
         type: 'Coffee or Lunch Meet-Up',
     },
     {
-        name: "Deep Tissue",
+        name: "Hot Stone",
         description:
             "Deep tissue massage focuses on reaching the deeper layers of muscles and connective tissue to release chronic tension and stubborn knots. Using slower strokes and firmer pressure, this treatment helps break up adhesions, improve mobility, and relieve long-standing areas of discomfort. It’s especially beneficial for people who experience muscle tightness from stress, postural strain, or athletic training. Many clients leave feeling both lighter and looser, with improved circulation and a greater sense of physical balance.",
         img: massageIcon,
         type: '',
     },
+    {
+        name: "Sweedish Massage",
+        description: "Swedish massage is the classic relaxation technique that gently eases tension from head to toe. With smooth, flowing strokes and light-to-medium pressure, it helps reduce stress, improve circulation, and promote an overall sense of calm. Ideal for first-time massage clients or anyone seeking deep relaxation, Swedish massage supports better sleep, uplifts mood, and leaves you feeling refreshed, restored, and reconnected with your body.",
+        img: massageIcon4,
+        type: '15 Minute Intro Session',
+    },
+    {
+        name: "Deep Tissue",
+        description:
+            "Deep tissue massage focuses on reaching the deeper layers of muscles and connective tissue to release chronic tension and stubborn knots. Using slower strokes and firmer pressure, this treatment helps break up adhesions, improve mobility, and relieve long-standing areas of discomfort. It’s especially beneficial for people who experience muscle tightness from stress, postural strain, or athletic training. Many clients leave feeling both lighter and looser, with improved circulation and a greater sense of physical balance.",
+        img: massageIcon3,
+        type: '30 Minute Meeting',
+    },
 ];
+
+
+export const slideColors = [
+    '#414b3b', '#ab8742', '#8ca87c', '#b68e8c'
+]

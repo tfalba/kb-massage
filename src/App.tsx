@@ -5,12 +5,10 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Footer from './components/Footer';
 import About from './pages/About';
-import Services from './pages/Services';
 import ScrollToTop from './helpers/ScrollToTop';
-import MyCalendlyAlt from './components/MyCalendlyAlt';
 import SimpleModal from './components/SimpleModal/SimpleModal';
-import ServicesAlt from './pages/ServicesAlt';
-import EventTypesAlt from './components/EventTypesAlt';
+import Services from './pages/Services';
+import EventTypes from './components/EventTypes';
 
 
 export default function App() {
@@ -22,14 +20,11 @@ export default function App() {
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="services" element={<Services />} />
-        <Route path="services-alt" element={<ServicesAlt />} />
-        {/* <Route path="booking" element={<MyCalendly />} />
-          <Route path="booking-alt" element={<MyCalendlyAlt />} /> */}
       </Routes>
       <Footer />
 
         <SimpleModal>
-          <EventTypesAlt style={{ width: '100%' }} />
+          <EventTypes style={{ width: '100%' }} />
         </SimpleModal>
 
     </Router>
