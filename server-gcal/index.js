@@ -18,7 +18,21 @@ dayjs.extend(isSameOrAfter);
 require("dotenv").config();
 
 const app = express();
-app.use(cors());
+const allowedOrigins = [
+  "http://localhost:5173",               // local dev
+  "https://kb-massage.vercel.app", // your live frontend
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // allow REST tools like curl or Postman (no Origin header)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    callback(new Error("Not allowed by CORS"));
+  },
+  credentials: true,
+}));
+// app.use(cors());
 app.use(express.json());
 
 const {
