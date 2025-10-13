@@ -22,7 +22,7 @@ app.use(cors());
 app.use(express.json());
 
 const {
-  // PORT = 4001,
+  PORT = process.env.PORT || 4001,
   GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET,
   GOOGLE_REDIRECT_URI,
@@ -37,7 +37,7 @@ const {
   BUSINESS_HOURS_JSON = "[]",
 } = process.env;
 
-const PORT = process.env.PORT || 4001; 
+// const PORT = process.env.PORT || 4001; 
 
 const oauth2Client = new google.auth.OAuth2(
   GOOGLE_CLIENT_ID,
@@ -361,4 +361,7 @@ app.post("/gcal/book", async (req, res) => {
 app.get("/gcal/health", (_, res) => res.json({ ok: true }));
 app.get("/", (_, res) => res.send("Booking server up"));
 
-app.listen(PORT, () => console.log(`Server on http://localhost:${PORT}`));
+// app.listen(PORT, () => console.log(`Server on http://localhost:${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
+});
