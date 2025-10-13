@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
 import { isoDaysFromNow, isoNow } from "./helpers/eventFormatter";
+import { API_GCAL } from "./config";
+
 
 type NewType = {name: string; duration: string}
 
-export async function getEventTypes() {
-    // const response = await fetch("/api/event-types");
-    const response = await fetch("http://localhost:3001/api/event-types");
+// export async function getEventTypes() {
+//     // const response = await fetch("/api/event-types");
+//     const response = await fetch("http://localhost:3001/api/event-types");
 
-    if (!response.ok) {
-        console.log("Failed to fetch event types");
-        throw new Error("Failed to fetch event types");
-    }
-    const data = await response.json();
-    console.log(data);
-    return data.collection || [];
-}
+//     if (!response.ok) {
+//         console.log("Failed to fetch event types");
+//         throw new Error("Failed to fetch event types");
+//     }
+//     const data = await response.json();
+//     console.log(data);
+//     return data.collection || [];
+// }
 
 export async function getAvailability(eventTypeUriOrId: string) {
     const p = new URLSearchParams({eventType: eventTypeUriOrId}) + '&weeks=4';
@@ -41,7 +43,9 @@ export async function getUserInfo() {
 export async function fetchAvailability(days: number = 14) {
   const start = isoNow();
   const end = isoDaysFromNow(days);
-  const url = `http://localhost:4001/gcal/availability?start=${encodeURIComponent(start)}&end=${encodeURIComponent(end)}`;
+    // const url = `http://localhost:4001/gcal/availability?start=${encodeURIComponent(start)}&end=${encodeURIComponent(end)}`;
+
+  const url = `${API_GCAL}/availability?start=${encodeURIComponent(start)}&end=${encodeURIComponent(end)}`;
 
   const res = await fetch(url);
   if (!res.ok) {
@@ -65,7 +69,10 @@ export function useAvailability(startISO: string, endISO: string, duration: stri
       setLoading(true);
       setError(null);
       try {
-        const url = `http://localhost:4001/gcal/availability?start=${encodeURIComponent(startISO)}&end=${encodeURIComponent(endISO)}&duration=${encodeURIComponent(duration)}`;
+                const url = `${API_GCAL}/availability?start=${encodeURIComponent(startISO)}&end=${encodeURIComponent(endISO)}&duration=${encodeURIComponent(duration)}`;
+
+        // const url = `http://localhost:4001/gcal/availability?start=${encodeURIComponent(startISO)}&end=${encodeURIComponent(endISO)}&duration=${encodeURIComponent(duration)}`;
+
         const res = await fetch(url, { signal: ac.signal });
         console.log('we are before the error throw')
         if (!res.ok) throw new Error(`${res.status} ${await res.text()}`);
@@ -89,7 +96,7 @@ export function useAvailability(startISO: string, endISO: string, duration: stri
 }
 
 export async function bookAppointment(start: string, end: string, guestName: string, guestEmail: string, guestPhone: string, typeDuration: string) {
-    const res = await fetch(`http://localhost:4001/gcal/book`, {
+    const res = await fetch(`${API_GCAL}/book`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ start, end, guestName, guestEmail, guestPhone, typeDuration}),
