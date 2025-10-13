@@ -22,7 +22,7 @@ app.use(cors());
 app.use(express.json());
 
 const {
-  PORT = 4001,
+  // PORT = 4001,
   GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET,
   GOOGLE_REDIRECT_URI,
@@ -36,6 +36,8 @@ const {
   SLOT_PADDING_MIN = "10",
   BUSINESS_HOURS_JSON = "[]",
 } = process.env;
+
+const PORT = process.env.PORT || 4001; 
 
 const oauth2Client = new google.auth.OAuth2(
   GOOGLE_CLIENT_ID,
