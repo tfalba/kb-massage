@@ -22,35 +22,19 @@ export default function AccordionModal({
 }: CardProps) {
   return (
     <div
+      className="acc-container"
       style={{
-        display: "flex",
-        top: "0",
         left: `${10 + idx * 10}px`,
-        height: "62vh",
       }}
     >
       <button
+        className="acc-button"
         onClick={() => handleOpen(idx)}
         style={{
           backgroundColor: slideColors[idx % 4],
-          border: "none",
-          height: "100%",
-          flex: "1",
         }}
       >
-        <span
-          style={{
-            writingMode: "vertical-rl",
-            width: "60px",
-            placeContent: "center",
-            fontSize: "calc(10px + 1.3vw)",
-            fontFamily: "Montserrat",
-            color: "white",
-            fontWeight: "200",
-          }}
-        >
-          {title}
-        </span>
+        <span className="acc-title ff-m">{title}</span>
       </button>
 
       {isOpen && (

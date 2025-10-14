@@ -30,7 +30,6 @@
     flex-direction: row;
     gap: var(--rg-gap);
     margin: 3vw;
-
     height: clamp(260px, 40vh, 460px);
   }
 }

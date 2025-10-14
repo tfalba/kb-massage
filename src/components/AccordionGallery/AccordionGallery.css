@@ -7,9 +7,8 @@
 }
 
 /* container */
+/* CHECK WORKING PROPERLY WITH ADDING FLEX-COL */
 .ag {
-  display: flex;
-  flex-direction: column;
   gap: var(--ag-gap);
   height: clamp(220px, 120vh, 120vh);
   margin: 3vw;
@@ -32,7 +31,6 @@
   cursor: pointer;
   overflow: hidden;
   border-radius: var(--ag-radius);
-  /* background: #000; */
   transition: flex-basis var(--ag-duration) var(--ag-ease),
     flex-grow var(--ag-duration) var(--ag-ease),
     min-width var(--ag-duration) var(--ag-ease), transform 160ms ease;

@@ -74,46 +74,24 @@ export default function BookingModal({
   };
 
   return (
-    <div style={{ position: "fixed", top: "0", right: "0" }}>
+    <div className="booking-container">
       {open && (
         <div className="booking-backdrop" onClick={handleCancel}>
-          <div className="booking-side" onClick={(e) => e.stopPropagation()}>
-            <h2
-              style={{
-                color: "#414b3a",
-                margin: 0,
-                padding: "0",
-                display: "flex",
-                justifyContent: "space-between",
-                width: "100%",
-                fontSize: "calc(12px + 1.5vw)",
-              }}
-            >
+          <div
+            className="booking-side flex-col aic"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 className="booking-title m0">
               {typeDuration} Min Session
-              <button
-                style={{
-                  fontSize: "calc(10px + 1.5vw)",
-                  border: "none",
-                  background: "none",
-                  fontFamily: "Montserrat",
-                  cursor: "pointer",
-                }}
-                onClick={handleCancel}
-              >
+              <button className="booking-close ff-m" onClick={handleCancel}>
                 X
               </button>
             </h2>
-            <h4
-              style={{
-                fontFamily: "Montserrat",
-                fontWeight: 400,
-                color: "#414b3a",
-              }}
-            >
+            <h4 className="booking-sub-title ff-m">
               {groupBookingIntoStandard(slot)}
             </h4>
-            <form onSubmit={handleBooking} className="App-names">
-              <label className="Modal-name-label" htmlFor="name">
+            <form onSubmit={handleBooking} className="booking-names flex-col">
+              <label className="booking-name-label" htmlFor="name">
                 Name
               </label>
               <input
@@ -123,10 +101,10 @@ export default function BookingModal({
                 onClick={() => setName("")}
                 required
                 onChange={(e) => setName(e.target.value)}
-                className="App-name-input"
+                className="booking-name-input"
                 id="name"
               />
-              <label className="Modal-name-label" htmlFor="email">
+              <label className="booking-name-label" htmlFor="email">
                 Email
               </label>
               <input
@@ -136,10 +114,10 @@ export default function BookingModal({
                 type="email"
                 onClick={() => setEmail("")}
                 onChange={(e) => setEmail(e.target.value)}
-                className="App-name-input"
+                className="booking-name-input"
                 id="email"
               />
-              <label className="Modal-name-label" htmlFor="phone">
+              <label className="booking-name-label" htmlFor="phone">
                 Phone
               </label>
               <input
@@ -149,14 +127,14 @@ export default function BookingModal({
                 onClick={() => setPhone("")}
                 required
                 onChange={(e) => setPhone(e.target.value)}
-                className="App-name-input"
+                className="booking-name-input"
                 id="phone"
               />
-              <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+              <div className="booking-button-cont">
                 <button
                   type="button"
                   onClick={handleCancel}
-                  className="App-button-submit"
+                  className="booking-button-submit"
                 >
                   Cancel
                 </button>
@@ -165,8 +143,8 @@ export default function BookingModal({
                   type="submit"
                   className={` ${
                     typeDuration === "60"
-                      ? "App-button-submit App-button-submit-60"
-                      : "App-button-submit App-button-submit-90"
+                      ? "booking-button-submit booking-button-submit-60"
+                      : "booking-button-submit booking-button-submit-90"
                   }`}
                 >
                   Book Now

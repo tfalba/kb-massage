@@ -101,15 +101,20 @@ export default function CalendarWithSlots({
   const daySlots = useMemo(() => {
     if (!selected) return [];
     const key = nyDayKey(selected.toISOString());
-    console.log(selected.getDate());
     return slots
       .filter((s) => nyDayKey(s.start_time) === key)
       .sort((a, b) => +new Date(a.start_time) - +new Date(b.start_time));
   }, [selected, slots]);
 
+  const notLoadOrError = useMemo(() => {
+    if (!loading1 && !loading2 && !error1 && !error2) {
+      return true;
+    } else return false;
+  }, [loading1, loading2, error1, error2]);
+
   return (
-    <section className="cal-slots">
-      <div className="cal" style={{ padding: "3vw" }}>
+    <section className="cal-slots flex-wrap jcc">
+      <div className="cal">
         <DayPicker
           mode="single"
           selected={selected}
@@ -137,31 +142,15 @@ export default function CalendarWithSlots({
         />
       </div>
 
-      <div
-        className="slots"
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          padding: "3vw",
-          flex: "1",
-          minWidth: "45%",
-        }}
-      >
+      <div className="slots flex-col">
         {(loading1 || loading2) && <p>Loading availability…</p>}
         {error1 && <p style={{ color: "crimson" }}>{error1}</p>}
         {error2 && <p style={{ color: "crimson" }}>{error2}</p>}
 
-        {!loading1 && !loading2 && !error1 && !error2 && (
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              paddingBottom: "2vw",
-            }}
-          >
+        {notLoadOrError && (
+          <div className="dc-nav-cont jcc aic">
             <button
-              className="dc-nav"
+              className="dc-nav m0"
               onClick={goPrev}
               disabled={
                 !selected ||
@@ -172,52 +161,45 @@ export default function CalendarWithSlots({
             >
               ‹
             </button>
-            <div className="dc-title">{selected?.toLocaleDateString()}</div>
+            <div className="dc-title flex-col m0 fs-main">
+              {selected?.toLocaleDateString()}
+            </div>
             <button
-              className="dc-nav"
+              className="dc-nav m0"
               onClick={goNext}
-              //   disabled={!canPrev}
               aria-label="Next day"
             >
               ›
             </button>
           </div>
         )}
-        {!loading1 && !loading2 && !error1 && !error2 && !selected && (
+        {notLoadOrError && !selected && (
           <p>Select a date on the calendar to see available times.</p>
         )}
-        {!loading1 &&
-          !loading2 &&
-          !error1 &&
-          !error2 &&
-          selected &&
-          daySlots.length === 0 && <p>No times available for this day.</p>}
-        {!loading1 &&
-          !loading2 &&
-          !error1 &&
-          !error2 &&
-          selected &&
-          daySlots.length > 0 && (
-            <ul className="slot-list">
-              {daySlots.map((s, i) => (
-                <li key={i}>
-                  <button
-                    className={`${
-                      type.duration === "60"
-                        ? "slot-btn"
-                        : "slot-btn slot-btn-sec"
-                    }`}
-                    onClick={() => {
-                      setOpen(true);
-                      setSlot(s);
-                    }}
-                  >
-                    {nycTime.format(new Date(s.start_time))}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
+        {notLoadOrError && selected && daySlots.length === 0 && (
+          <p>No times available for this day.</p>
+        )}
+        {notLoadOrError && selected && daySlots.length > 0 && (
+          <ul className="slot-list flex-wrap jcc m0">
+            {daySlots.map((s, i) => (
+              <li key={i}>
+                <button
+                  className={`${
+                    type.duration === "60"
+                      ? "slot-btn"
+                      : "slot-btn slot-btn-sec"
+                  }`}
+                  onClick={() => {
+                    setOpen(true);
+                    setSlot(s);
+                  }}
+                >
+                  {nycTime.format(new Date(s.start_time))}
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
       {slot && (
         <BookingModal
