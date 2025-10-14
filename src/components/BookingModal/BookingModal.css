@@ -1,83 +1,107 @@
 .booking-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: #4140406e;
+  display: flex;
+  justify-content: flex-end;
+  z-index: 1000;
+  /* ensure it’s above other content */
+}
+
+.booking-container {
     position: fixed;
-    inset: 0;
-    background-color: #4140406e;
-    display: flex;
-    justify-content: flex-end;
-    z-index: 1000;
-    /* ensure it’s above other content */
+    top: 0;
+    right: 0;
 }
 
 .booking-side {
-    width: fit-content;
-    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
-    overflow-y: auto;
-    animation: bookingSlideIn 0.3s ease-out;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: max-content;
-    padding: 2vw 2vw 4vw 2vw;
-    background-color: #ecefea;
-    max-height: 100vh;
-    
+  width: fit-content;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  animation: bookingSlideIn 0.3s ease-out;
+  align-items: center;
+  height: max-content;
+  padding: 2vw 2vw 4vw 2vw;
+  background-color: #ecefea;
+  max-height: 100vh;
 }
 
-@keyframes bookingSlideIn {
-    from {
-        transform: translateX(100%);
-    }
-
-    to {
-        transform: translateX(0);
-    }
+.booking-title {
+  color: #414b3a;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: calc(12px + 1.5vw);
 }
 
-.App-button-submit {
-    background-color: #f4389e;
-    background-color: #0003;
-    border-radius: 12px;
+.booking-sub-title {
+    font-weight: 400;
+    color: var(--brand-green);
+}
+
+.booking-close {
     border: none;
-    color: white;
-    font-family: 'Belleza';
-
-    font-size: calc(10px + .7vw);
-    margin-top: 5vh;
-    padding: .5rem 1.2rem;
-    width: auto;
+    background: none;
+    font-size: calc(10px + 1.5vw);
     cursor: pointer;
 }
 
-.App-button-submit-60 {
-    background-color: #7cac5b;
-}
-
-.App-button-submit-90 {
-    background-color: #6db0d4ec;
-}
-
-.App-names {
+.booking-button-cont {
     display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    height: 100%;
-    width: 320px;
-    padding: 0 4vw;
-    width: calc(min(380px, 100vw));
+    justify-content: space-evenly;
 }
 
-.App-name-input {
-    height: 30px;
-    border: none;
-    padding-left: 6px;
-    font-size: calc(10px + .5vw);
-    font-family: 'Belleza';
+@keyframes bookingSlideIn {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
 }
 
-.Modal-name-label {
-    text-align: left;
-    font-family: 'Belleza';
-    font-size: calc(10px + .6vw);
-    margin-top: 18px;
-    margin-bottom: 4px;
+.booking-button-submit {
+  background-color: #0003;
+  border-radius: 12px;
+  border: none;
+  color: white;
+  font-family: "Belleza";
+  font-size: calc(10px + 0.7vw);
+  margin-top: 5vh;
+  padding: 0.5rem 1.2rem;
+  width: auto;
+  cursor: pointer;
+}
+
+.booking-button-submit-60 {
+  background-color: #7cac5b;
+}
+
+.booking-button-submit-90 {
+  background-color: #6db0d4ec;
+}
+
+.booking-names {
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 4vw;
+  width: calc(min(380px, 100vw));
+}
+
+.booking-name-input {
+  height: 30px;
+  border: none;
+  padding-left: 6px;
+  font-size: calc(10px + 0.5vw);
+  font-family: "Belleza";
+}
+
+.booking-name-label {
+  text-align: left;
+  font-family: "Belleza";
+  font-size: calc(10px + 0.6vw);
+  margin-top: 18px;
+  margin-bottom: 4px;
 }

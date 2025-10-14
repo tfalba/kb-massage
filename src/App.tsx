@@ -1,15 +1,14 @@
-import './App.css';
-import './index.css'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Home from './pages/Home';
-import Footer from './components/Footer';
-import About from './pages/About';
-import ScrollToTop from './helpers/ScrollToTop';
-import SimpleModal from './components/SimpleModal/SimpleModal';
-import Services from './pages/Services';
-import EventTypes from './components/EventTypes';
-
+import "./App.css";
+import "./index.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import Footer from "./components/Footer";
+import About from "./pages/About";
+import ScrollToTop from "./helpers/ScrollToTop";
+import SimpleModal from "./components/SimpleModal/SimpleModal";
+import Services from "./pages/Services";
+import EventTypes from "./components/EventTypes";
 
 export default function App() {
   return (
@@ -23,10 +22,9 @@ export default function App() {
       </Routes>
       <Footer />
 
-        <SimpleModal>
-          <EventTypes style={{ width: '100%' }} />
-        </SimpleModal>
-
+      <SimpleModal>
+        <EventTypes />
+      </SimpleModal>
     </Router>
   );
 }

@@ -5,6 +5,27 @@
   --acc-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
+.acc-container {
+    display: flex;
+    top: 0;
+    height: 62vh;
+}
+
+.acc-button {
+    border: none;
+    height: 100%;
+    flex: 1;
+}
+
+.acc-title {
+    writing-mode: vertical-rl;
+    width: 60px;
+    place-content: center;
+    font-size: calc(10px + 1.3vw);
+    color: var(--brand-white);
+    font-weight: 200;
+}
+
 .acc-modal-backdrop {
   inset: 0;
   background: rgba(0, 0, 0, 0.4);

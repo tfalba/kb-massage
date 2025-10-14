@@ -56,7 +56,7 @@ export default function AccordionGallery({
   return (
     <section className="PhotoGrid-section">
       <div
-        className="ag"
+        className="ag flex-col"
         style={
           {
             "--min-expanded": `${minExpanded}px`,

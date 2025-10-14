@@ -18,7 +18,7 @@ export default function Services() {
     return (
         <main>
             <section className='services-wrap'>
-                <h2 className="services-title">Massage Services</h2>
+                <h2 className="services-title m0">Massage Services</h2>
 
                 <div style={{display: 'flex', width: isOpen || isOpen === 0 ? '100%' : '25%'}} className="service-wrap">
                     {services.map((service, idx) => (
