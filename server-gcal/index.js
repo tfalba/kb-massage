@@ -51,15 +51,12 @@ const {
   BUSINESS_HOURS_JSON = "[]",
 } = process.env;
 
-// const PORT = process.env.PORT || 4001; 
 
 const oauth2Client = new google.auth.OAuth2(
   GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET,
   GOOGLE_REDIRECT_URI
 );
-
-
 
 const TOKENS_PATH = process.env.TOKENS_PATH || path.resolve(__dirname, "tokens.json");
 

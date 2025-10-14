@@ -12,11 +12,6 @@
   display: none;
 }
 
-
-[id*="calendly-dock"] {
-  display: none;
-}
-
 .logo {
   /* height: 6em; */
   /* padding: 1.5em; */

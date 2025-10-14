@@ -10,12 +10,7 @@ export default function Navbar() {
             <div className='Navbar-links'>
                 <Link className={pathname === "/" ? "Navbar-active" : ""} to="/">Home</Link>
                 <Link className={pathname === "/about" ? "Navbar-active" : ""} to="/about">About</Link>
-                {/* <Link className={pathname === "/services" ? "Navbar-active" : ""} to="/services">Services</Link> */}
                 <Link className={pathname === "/services" ? "Navbar-active" : ""} to="/services">Services</Link>
-
-                {/* <Link className={`button ${pathname === "/booking" ? "Navbar-active" : ""}`} to="/booking" >Book Now</Link>
-                <Link className={`button ${pathname === "/booking-alt" ? "Navbar-active" : ""}`} to="/booking-alt" >Book (Alt)</Link> */}
-
             </div>
         </nav>
     )
