@@ -3,43 +3,6 @@ import { isoDaysFromNow, isoNow } from "./helpers/eventFormatter";
 import { API_GCAL } from "./config";
 
 
-type NewType = {name: string; duration: string}
-
-// export async function getEventTypes() {
-//     // const response = await fetch("/api/event-types");
-//     const response = await fetch("http://localhost:3001/api/event-types");
-
-//     if (!response.ok) {
-//         console.log("Failed to fetch event types");
-//         throw new Error("Failed to fetch event types");
-//     }
-//     const data = await response.json();
-//     console.log(data);
-//     return data.collection || [];
-// }
-
-export async function getAvailability(eventTypeUriOrId: string) {
-    const p = new URLSearchParams({eventType: eventTypeUriOrId}) + '&weeks=4';
-    console.log(p.toString());
-    const r = await fetch(`/api/availability?${p.toString()}`);
-    const j = await r.json();
-    console.log(j);
-    if (!r.ok) throw new Error(j.message || "Failed to fetch availability");
-    return j.collection || [];
-
-}
-
-export async function getUserInfo() {
-    const response = await fetch("/api/user");
-    if (!response.ok) {
-        console.log("Failed to fetch user info");
-        throw new Error("Failed to fetch user info");
-    }
-    const data = await response.json();
-    console.log(data);
-    return data.scheduling_url;
-}
-
 export async function fetchAvailability(days: number = 14) {
   const start = isoNow();
   const end = isoDaysFromNow(days);

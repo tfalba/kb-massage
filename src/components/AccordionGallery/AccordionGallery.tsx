@@ -1,56 +1,60 @@
 import React, { useEffect, useState } from "react";
 import "./AccordionGallery.css";
 
-
 export default function AccordionGallery({
-  minExpanded = 120,   // px: minimum width when expanded
-  minCollapsed = 80,   // px: minimum width for others
+  minExpanded = 120, // px: minimum width when expanded
+  minCollapsed = 80, // px: minimum width for others
   expandable = true,
   slides,
   spin = true,
   manualTrip = false,
-}: { minExpanded?: number; minCollapsed?: number; expandable?: boolean; slides: {photo: string; text: string}[]; spin?: boolean; manualTrip?: boolean; }) {
+}: {
+  minExpanded?: number;
+  minCollapsed?: number;
+  expandable?: boolean;
+  slides: { photo: string; text: string }[];
+  spin?: boolean;
+  manualTrip?: boolean;
+}) {
   const [active, setActive] = useState<number | null>(null);
   const [manual, setManual] = useState(manualTrip);
-   const randomDelay = () => {
-        return Math.random() * 3;
-    }
+  const randomDelay = () => {
+    return Math.random() * 3;
+  };
 
-      useEffect(() => {
-        if (!expandable) return;
-        // let interval: NodeJS.Timeout<any>;
-        let interval: ReturnType<typeof setInterval>;
+  useEffect(() => {
+    if (!expandable) return;
+    let interval: ReturnType<typeof setInterval>;
 
-        const timeout = setTimeout(() => {
-          // setManual(false);
+    const timeout = setTimeout(() => {
+      // setManual(false);
 
-     interval = setInterval(() => {
-      // pick a random index different from current
-      if (manual) return; // stop auto if user has clicked
-      setActive((prev) => {
-        let next = prev;
-        while (next === prev) {
-          if (prev === null) {
-            next = 0;
-          } else {
-            next = (prev + 1) % slides.length;
+      interval = setInterval(() => {
+        // pick a random index different from current
+        if (manual) return; // stop auto if user has clicked
+        setActive((prev) => {
+          let next = prev;
+          while (next === prev) {
+            if (prev === null) {
+              next = 0;
+            } else {
+              next = (prev + 1) % slides.length;
+            }
+            // next = Math.floor(Math.random() * images.length);
           }
-          // next = Math.floor(Math.random() * images.length);
-        }
-        return next;
-      });
-    }, 3500); // every 3.5 seconds
-        }, 4000); // initial delay 4s
+          return next;
+        });
+      }, 3500); // every 3.5 seconds
+    }, 4000); // initial delay 4s
 
     return () => {
       clearInterval(interval);
       clearTimeout(timeout);
     }; // cleanup on unmount
   }, [manual]);
-  
+
   return (
     <section className="PhotoGrid-section">
-
       <div
         className="ag"
         style={
@@ -68,8 +72,21 @@ export default function AccordionGallery({
           return (
             <button
               key={i}
-              className={`${spin ? "spin-y-3" : ""} ag-item ${isActive ? "is-active" : active === null ? "is-idle" : "is-collapsed"}`}
-              onClick={expandable ? () => { setManual(true); setActive(isActive ? null : i); } : undefined}
+              className={`${spin ? "spin-y-3" : ""} ag-item ${
+                isActive
+                  ? "is-active"
+                  : active === null
+                  ? "is-idle"
+                  : "is-collapsed"
+              }`}
+              onClick={
+                expandable
+                  ? () => {
+                      setManual(true);
+                      setActive(isActive ? null : i);
+                    }
+                  : undefined
+              }
               onKeyDown={(e) => {
                 if (e.key === "Escape") setActive(null);
               }}
@@ -78,7 +95,14 @@ export default function AccordionGallery({
               style={{ animationDelay: `${randomDelay()}s` }}
             >
               <img src={s.photo} alt={`Gallery ${i + 1}`} />
-              <span className={`ag-label ${active !== null && isActive ? "is-active" : "is-collapsed"}`}> {s.text}</span>
+              <span
+                className={`ag-label ${
+                  active !== null && isActive ? "is-active" : "is-collapsed"
+                }`}
+              >
+                {" "}
+                {s.text}
+              </span>
             </button>
           );
         })}

@@ -4,17 +4,17 @@
   --rg-gap-small: 5vw;
   --rg-radius: 14px;
   --rg-duration: 450ms;
-  --rg-ease: cubic-bezier(.2,.7,.2,1);
+  --rg-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 /* container */
 
 .rg-section {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    background-color: #f7f1e6;
-    padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #f7f1e6;
+  padding: 2rem 0;
 }
 
 .rg {
@@ -33,7 +33,6 @@
 
     height: clamp(260px, 40vh, 460px);
   }
-
 }
 
 /* items behave like flexible panes */
@@ -46,21 +45,18 @@
   cursor: pointer;
   overflow: hidden;
   border-radius: var(--ag-radius);
-  /* background: #000; */
-  transition:
-    flex-basis var(--rg-duration) var(--rg-ease),
-    flex-grow  var(--rg-duration) var(--rg-ease),
-    min-width  var(--rg-duration) var(--rg-ease),
-    transform  160ms ease;
+  transition: flex-basis var(--rg-duration) var(--rg-ease),
+    flex-grow var(--rg-duration) var(--rg-ease),
+    min-width var(--rg-duration) var(--rg-ease), transform 160ms ease;
 }
-@media (min-width: 640px) {
-  .rg-item {
-    /* min-width: var(--min-collapsed, 80px); */
-  }
 
+.rg-item:focus-visible {
+  outline: 2px solid #0d4650;
+  outline-offset: 2px;
 }
-.rg-item:focus-visible { outline: 2px solid #0D4650; outline-offset: 2px; }
-.rg-item:hover { transform: translateY(-2px); }
+.rg-item:hover {
+  transform: translateY(-2px);
+}
 
 /* image fills the pane */
 .rg-item img {
@@ -68,42 +64,22 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: saturate(.95);
+  filter: saturate(0.95);
   transition: transform var(--ag-duration) var(--ag-ease), filter 240ms ease;
 }
 
-/* label overlay */
-
-.rg-label {
-  /* display: none; */
-}
-
 .rg-label.is-active {
-  /* position: absolute; left: 0; right: 0; bottom: 0; */
-  position: absolute; 
-  /* top: 20%; */
+  position: absolute;
   padding: 1rem 1.3rem;
-
-  color: black;
-  color: white;
   color: #5d5340;
-  /* font-weight: 600; */
-  /* text-shadow: 0 2px 10px rgba(0,0,0,.55); */
-  /* background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.45) 100%); */
-  /* background: white; */
-  /* background: #ffffff85; */
-
   pointer-events: none;
-  /* width: 35%; */
   font-size: min(calc(8px + 1vw), calc(8px + 1.2vh));
   line-height: 1.4;
-  font-family: 'Belleza', sans-serif;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   place-content: center;
-    opacity: 0;
+  opacity: 0;
   animation: rgFadeIn 1s ease forwards;
-  animation-delay: .5s; /* wait before fading in */
-
+  animation-delay: 0.5s; /* wait before fading in */
 }
 
 .rg-label.is-collapsed {
@@ -119,48 +95,42 @@
 /* state when one is active: others shrink to min, active grows */
 
 .rg-item.is-active {
-  flex: 6 1 0%;
-    flex: var(--num-items, 10) 1 0%;
-
-  /* min-width: var(--min-expanded, 320px);  ensures a minimum expanded width */
+  flex: var(--num-items, 10) 1 0%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #318f8de3;
-  background-color: #5d5340;
   background-color: #cbf7f028;
   border: 3px solid #ab874252;
-  /* min-height: 150px; */
-  /* background: #000; */
 }
 @media (min-width: 640px) {
+  .rg-item.is-active {
+    flex: var(--num-items, 10) 1 0%;
 
-.rg-item.is-active {
-  flex: 10 1 0%;
-  flex: var(--num-items, 10) 1 0%;
-
-  min-width: var(--min-expanded, 120px);  /* ensures a minimum expanded width */
-  display: flex;
+    min-width: var(
+      --min-expanded,
+      120px
+    ); /* ensures a minimum expanded width */
+    display: flex;
+  }
 }
-}
 
-.rg-item.is-active img { filter: saturate(1.05);}
+.rg-item.is-active img {
+  filter: saturate(1.05);
+}
 
 .rg-item.is-collapsed {
   flex: 1 1 0%;
   min-width: var(--min-collapsed, 40px);
-  opacity: .9;
+  opacity: 0.9;
 }
-
-/* when none selected yet: equal widths */
-.rg-item.is-idle {}
 
 /* motion accessibility */
 @media (prefers-reduced-motion: reduce) {
-  .rg-item, .rg-item img { transition: none; }
+  .rg-item,
+  .rg-item img {
+    transition: none;
+  }
 }
-
-
 
 @keyframes rgSpinX3 {
   from {
@@ -170,13 +140,11 @@
   to {
     transform: rotateX(360deg);
   }
-
   /* 2× 360° */
 }
 
 .rg-spin-y-3 {
   display: inline-block;
-  /* animation: rgSpinY3 3s ease-in-out forwards; */
   animation: rgSpinX3 3s ease-in-out forwards;
 
   transform-style: preserve-3d;

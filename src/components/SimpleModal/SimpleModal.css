@@ -4,23 +4,19 @@
   background: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: flex-end; /* push modal to the right */
-    z-index: 1000; /* ensure it’s above other content */
+  z-index: 1000; /* ensure it’s above other content */
 }
 
 .modal-side {
-  /* background: #fff;
-  background: #8ba87c; */
-  /* width: calc(max(44vw, 380px));       adjust as needed */
-  max-width: 1400px;       /* don’t overflow small screens */
+  max-width: 1400px; /* don’t overflow small screens */
   width: 100%;
-  height: 100%;          /* full viewport height */
+  height: 100%; /* full viewport height */
   box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
-  overflow-y: auto;      /* scroll if content taller than screen */
+  overflow-y: auto; /* scroll if content taller than screen */
   animation: slideIn 0.3s ease-out;
   display: flex;
   height: max-content;
   max-height: 100vh;
-  /* height: 100%; */
 }
 
 @keyframes slideIn {

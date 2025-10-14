@@ -14,7 +14,6 @@ export default function Services() {
         }
 
     }
-    // const allServices = services + services;
 
     return (
         <main>

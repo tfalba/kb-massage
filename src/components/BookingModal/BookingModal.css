@@ -4,7 +4,6 @@
     background-color: #4140406e;
     display: flex;
     justify-content: flex-end;
-    /* align-items: flex-end; */
     z-index: 1000;
     /* ensure it’s above other content */
 }
@@ -55,7 +54,6 @@
 
 .App-button-submit-90 {
     background-color: #6db0d4ec;
-;
 }
 
 .App-names {
