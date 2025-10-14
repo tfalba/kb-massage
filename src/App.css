@@ -88,13 +88,13 @@
 }
 
 .Navbar {
-  padding: 1vw 2vw 1vw 2vw;
+  padding: 1vw 10vw 1vw 2vw;
   background-color: var(--brand-green);
   display: flex;
   justify-content: space-between;
   width: 100vw;
   height: calc(max(12vw, 12vh, 105px));
-  padding-right: calc(max(8vw, 8vh, 70px));
+  /* padding-right: calc(max(8vw, 8vh, 70px)); */
   z-index: 1000;
 }
 
@@ -108,7 +108,9 @@
 }
 
 .Navbar a:hover {
-  color: #8ba87c;
+    color: var(--brand-white);
+
+  /* color: #8ba87c; */
 }
 
 .Navbar-links {
@@ -279,9 +281,29 @@
   background-color: #5d5340;
 }
 
+.service-wrap {
+  display: flex;
+  flex-direction: column;
+
+}
+
+@media (min-width: 640px) {
+  .service-wrap {
+    flex-direction: row;
+  }
+}
+
+
 .services-title {
-  text-align: center;
+  text-align: left;
   padding: 2vw 4vw;
+}
+
+@media (min-width: 640px) {
+  .services-title {
+  text-align: center;
+  }
+
 }
 
 .service-card {
