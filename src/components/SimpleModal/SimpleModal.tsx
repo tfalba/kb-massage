@@ -26,11 +26,14 @@ export default function SimpleModal({
         <span
           style={{
             writingMode: "vertical-rl",
-            width: "40px",
+            // width: "40px",
+            width: "4vw",
             placeContent: "center",
-            fontSize: "calc(8px + 1vw)",
+            fontSize: "calc(10px + .8vw)",
             fontFamily: "Montserrat",
             textDecoration: "none",
+            color: "white",
+            fontWeight: 600,
           }}
         >
           Book Now

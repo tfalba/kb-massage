@@ -8,8 +8,9 @@ Modal.setAppElement("#root"); // for accessibility
 type CardProps = {
   title: string;
   isOpen: boolean;
+  prevOpen: number;
   idx: number;
-  handleOpen: (idx: number | null) => void;
+  handleOpen: (idx: number) => void;
   children: React.ReactNode;
 };
 
@@ -19,10 +20,12 @@ export default function AccordionModal({
   idx,
   handleOpen,
   isOpen,
+  prevOpen,
 }: CardProps) {
   return (
     <div
-      className="acc-container"
+        className={`${isOpen ? "acc-container acc-container-open" : "acc-container"}`}
+    //   className="acc-container"
       style={{
         left: `${10 + idx * 10}px`,
       }}
@@ -39,7 +42,8 @@ export default function AccordionModal({
 
       {isOpen && (
         <div
-          className="acc-modal-side"
+            className={`${prevOpen>idx || prevOpen === -1 ? "acc-modal-side" : "acc-modal-side acc-side-right"}`}
+        //   className="acc-modal-side"
           style={{ backgroundColor: slideColors[idx % 4] }}
           onClick={() => handleOpen(idx)}
         >
