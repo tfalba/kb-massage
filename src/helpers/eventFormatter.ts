@@ -51,9 +51,14 @@ export function groupSlotsByNYDay<T extends { start_time: string; end_time: stri
 }
 
 export const DAYS = (n: number) => 24 * 60 * 60 * 1000 * n;
+export const HOURS = (n: number) => 60 * 60 * 1000 * n;
 
 export function isoNow() {
   return new Date().toISOString();
+}
+
+export function isTwoHoursFromNow() {
+    return new Date(Date.now() + HOURS(2)).toISOString();
 }
 
 export function isoDaysFromNow(n: number) {

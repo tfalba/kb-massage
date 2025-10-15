@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { isoDaysFromNow, isoNow } from "./helpers/eventFormatter";
+import { isoDaysFromNow, isoNow, isTwoHoursFromNow } from "./helpers/eventFormatter";
 import { API_GCAL } from "./config";
 
 
 export async function fetchAvailability(days: number = 14) {
-  const start = isoNow();
+  // const start = isoNow();
+  const start = isTwoHoursFromNow();
   const end = isoDaysFromNow(days);
     // const url = `http://localhost:4001/gcal/availability?start=${encodeURIComponent(start)}&end=${encodeURIComponent(end)}`;
 
