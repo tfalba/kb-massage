@@ -60,33 +60,78 @@ const oauth2Client = new google.auth.OAuth2(
 
 const TOKENS_PATH = process.env.TOKENS_PATH || path.resolve(__dirname, "tokens.json");
 
-async function saveTokens(tokens) {
-  // Keep minimal set; include refresh_token if present
-  const current = await loadTokens().catch(() => ({}));
-  const merged = { ...current, ...tokens }; // preserve existing refresh_token if not re-sent
-  await fsp.writeFile(TOKENS_PATH, JSON.stringify(merged, null, 2), { mode: 0o600 });
+// async function saveTokens(tokens) {
+//   // Keep minimal set; include refresh_token if present
+//   const current = await loadTokens().catch(() => ({}));
+//   const merged = { ...current, ...tokens }; // preserve existing refresh_token if not re-sent
+//   await fsp.writeFile(TOKENS_PATH, JSON.stringify(merged, null, 2), { mode: 0o600 });
+// }
+
+// async function loadTokens() {
+//   const raw = await fsp.readFile(TOKENS_PATH, "utf-8");
+//   return JSON.parse(raw);
+// }
+
+// function tokensFileExists() {
+//   try { fs.accessSync(TOKENS_PATH, fs.constants.F_OK); return true; } catch { return false; }
+// }
+
+
+// // Load tokens at boot (if saved previously)
+// (async () => {
+//   if (tokensFileExists()) {
+//     try {
+//       const tokens = await loadTokens();
+//       oauth2Client.setCredentials(tokens);
+//       console.log("✅ Loaded saved Google tokens.");
+//     } catch (e) {
+//       console.warn("⚠️ Could not load saved tokens:", e.message);
+//     }
+//   } else {
+//     console.log("ℹ️ No saved tokens yet. Visit /gcal/auth/url to connect.");
+//   }
+// })();
+
+
+/** ensure parent directory exists (important if TOKENS_PATH is under /data/subdir/...) */
+async function ensureDirFor(filePath) {
+  const dir = path.dirname(filePath);
+  await fsp.mkdir(dir, { recursive: true });
 }
 
+/** read tokens.json safely (return {} if missing/bad) */
 async function loadTokens() {
-  const raw = await fsp.readFile(TOKENS_PATH, "utf-8");
-  return JSON.parse(raw);
+  try {
+    const raw = await fsp.readFile(TOKENS_PATH, "utf8");
+    return JSON.parse(raw);
+  } catch (e) {
+    return {}; // no file yet or invalid JSON
+  }
 }
 
-function tokensFileExists() {
-  try { fs.accessSync(TOKENS_PATH, fs.constants.F_OK); return true; } catch { return false; }
+/** atomic save to avoid partial writes on crash */
+async function saveTokens(tokens) {
+  const current = await loadTokens();
+  // Preserve an existing refresh_token if Google didn’t send a new one
+  const merged = {
+    ...current,
+    ...tokens,
+    refresh_token: tokens.refresh_token || current.refresh_token || undefined,
+  };
+
+  await ensureDirFor(TOKENS_PATH);
+  const tmp = `${TOKENS_PATH}.tmp`;
+  await fsp.writeFile(tmp, JSON.stringify(merged, null, 2), { mode: 0o600 });
+  await fsp.rename(tmp, TOKENS_PATH);
+  return merged;
 }
 
-
-// Load tokens at boot (if saved previously)
+// Load on boot (non-fatal if missing)
 (async () => {
-  if (tokensFileExists()) {
-    try {
-      const tokens = await loadTokens();
-      oauth2Client.setCredentials(tokens);
-      console.log("✅ Loaded saved Google tokens.");
-    } catch (e) {
-      console.warn("⚠️ Could not load saved tokens:", e.message);
-    }
+  const saved = await loadTokens();
+  if (saved && (saved.refresh_token || saved.access_token)) {
+    oauth2Client.setCredentials(saved);
+    console.log("✅ Loaded saved Google tokens.");
   } else {
     console.log("ℹ️ No saved tokens yet. Visit /gcal/auth/url to connect.");
   }
@@ -123,9 +168,23 @@ app.get("/gcal/auth/url", (req, res) => {
   res.json({ url });
 });
 
+// app.get("/gcal/oauth2callback", async (req, res) => {
+//   try {
+//     const { code } = req.query;
+//     const { tokens } = await oauth2Client.getToken(code);
+//     oauth2Client.setCredentials(tokens);
+//     await saveTokens(tokens);
+//     res.send("Google Calendar connected ✅ You can close this tab.");
+//   } catch (e) {
+//     console.error("OAuth error", e);
+//     res.status(500).send("OAuth failed");
+//   }
+// });
+
 app.get("/gcal/oauth2callback", async (req, res) => {
   try {
     const { code } = req.query;
+    if (!code) return res.status(400).send("Missing code");
     const { tokens } = await oauth2Client.getToken(code);
     oauth2Client.setCredentials(tokens);
     await saveTokens(tokens);
@@ -305,15 +364,25 @@ app.get("/gcal/availability", async (req, res) => {
 
 
 // See whether we’re authorized
-app.get("/gcal/auth/status", async (req, res) => {
-  const hasFile = tokensFileExists();
-  const creds = oauth2Client.credentials || {};
+app.get("/gcal/auth/status", async (_req, res) => {
+  const saved = await loadTokens();
   res.json({
-    savedTokensFile: hasFile,
-    hasRefreshToken: Boolean(creds.refresh_token),
-    tokenExpiry: creds.expiry_date ? new Date(creds.expiry_date).toISOString() : null,
+    path: TOKENS_PATH,
+    hasFile: fs.existsSync(TOKENS_PATH),
+    hasRefreshToken: Boolean(saved.refresh_token),
+    expiryISO: saved.expiry_date ? new Date(saved.expiry_date).toISOString() : null,
   });
 });
+
+// app.get("/gcal/auth/status", async (req, res) => {
+//   const hasFile = tokensFileExists();
+//   const creds = oauth2Client.credentials || {};
+//   res.json({
+//     savedTokensFile: hasFile,
+//     hasRefreshToken: Boolean(creds.refresh_token),
+//     tokenExpiry: creds.expiry_date ? new Date(creds.expiry_date).toISOString() : null,
+//   });
+// });
 
 // Disconnect (revoke) and delete tokens
 app.post("/gcal/auth/disconnect", async (req, res) => {
