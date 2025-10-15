@@ -186,8 +186,8 @@ export default function CalendarWithSlots({
                 <button
                   className={`${
                     type.duration === "60"
-                      ? "slot-btn"
-                      : "slot-btn slot-btn-sec"
+                      ? "slot-btn ff-b"
+                      : "slot-btn slot-btn-sec ff-b"
                   }`}
                   onClick={() => {
                     setOpen(true);

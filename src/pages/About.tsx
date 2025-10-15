@@ -12,10 +12,10 @@ function About() {
         />
 
         <div className="About-top-section flex-col jcc">
-          <p className="About-top-title m0">Kara Bazemore</p>
-          <p className="About-title">{aboutMe[0].title}</p>
+          <p className="About-top-title m0 ff-b">Kara Bazemore</p>
+          <p className="About-title ff-m">{aboutMe[0].title}</p>
 
-          <p className="About-content">{aboutMe[0].content}</p>
+          <p className="About-content ff-m">{aboutMe[0].content}</p>
         </div>
       </div>
       <div className="About-lower-container jcc flex-wrap">
@@ -25,8 +25,8 @@ function About() {
               i % 2 === 0 ? "About-section-even" : "About-section-odd"
             }`}
           >
-            <p className="About-title">{a.title}</p>
-            <p className="About-content">{a.content}</p>
+            <p className="About-title ff-m">{a.title}</p>
+            <p className="About-content ff-m">{a.content}</p>
           </div>
         ))}
       </div>

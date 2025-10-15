@@ -33,7 +33,7 @@ export default function EventTypes() {
             {newTypes.map((t, i) => (
               <li className="EventTypes-inner" key={i}>
                 <button
-                  className={`EventTypes-button fs-main ${
+                  className={`EventTypes-button fs-main ff-b ${
                     type.duration === "60" && type.duration === t.duration
                       ? "EventTypes-button-active"
                       : type.duration === "90" && type.duration === t.duration

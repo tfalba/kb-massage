@@ -34,7 +34,7 @@ export default function Services() {
                             </div>
                             <div style={{flex: '2', maxHeight: '92%', overflowY: 'scroll'}}>
                             <h3 className="service-name">{service.name}</h3>
-                            <p className="service-desc">{service.description}</p>
+                            <p className="service-desc ff-b">{service.description}</p>
                             </div>
                         </article>
 

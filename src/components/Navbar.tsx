@@ -4,7 +4,7 @@ import logo from "../assets/kara-logo5.png";
 export default function Navbar() {
   const { pathname } = useLocation();
   return (
-    <nav className="Navbar aic">
+    <nav className="Navbar aic ff-m">
       <img className="Navbar-logo logo" src={logo} alt="the top " />
 
       <div className="Navbar-links flex-col">
