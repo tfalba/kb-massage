@@ -1,6 +1,7 @@
 import "./App.css";
 import "./index.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Footer from "./components/Footer";
@@ -12,7 +13,8 @@ import EventTypes from "./components/EventTypes";
 
 export default function App() {
   return (
-    <Router>
+    // <Router>
+    <HashRouter>
       <ScrollToTop />
       <Navbar />
       <Routes>
@@ -25,6 +27,7 @@ export default function App() {
       <SimpleModal>
         <EventTypes />
       </SimpleModal>
-    </Router>
+      </HashRouter>
+    // </Router>
   );
 }
