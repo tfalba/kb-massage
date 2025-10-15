@@ -96,7 +96,7 @@ export default function AccordionGallery({
             >
               <img src={s.photo} alt={`Gallery ${i + 1}`} />
               <span
-                className={`ag-label ${
+                className={`ag-label ff-b ${
                   active !== null && isActive ? "is-active" : "is-collapsed"
                 }`}
               >

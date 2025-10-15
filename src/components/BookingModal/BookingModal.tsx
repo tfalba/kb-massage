@@ -91,7 +91,7 @@ export default function BookingModal({
               {groupBookingIntoStandard(slot)}
             </h4>
             <form onSubmit={handleBooking} className="booking-names flex-col">
-              <label className="booking-name-label" htmlFor="name">
+              <label className="booking-name-label ff-b" htmlFor="name">
                 Name
               </label>
               <input
@@ -101,10 +101,10 @@ export default function BookingModal({
                 onClick={() => setName("")}
                 required
                 onChange={(e) => setName(e.target.value)}
-                className="booking-name-input"
+                className="booking-name-input ff-b"
                 id="name"
               />
-              <label className="booking-name-label" htmlFor="email">
+              <label className="booking-name-label ff-b" htmlFor="email">
                 Email
               </label>
               <input
@@ -114,10 +114,10 @@ export default function BookingModal({
                 type="email"
                 onClick={() => setEmail("")}
                 onChange={(e) => setEmail(e.target.value)}
-                className="booking-name-input"
+                className="booking-name-input ff-b"
                 id="email"
               />
-              <label className="booking-name-label" htmlFor="phone">
+              <label className="booking-name-label ff-b" htmlFor="phone">
                 Phone
               </label>
               <input
@@ -127,14 +127,14 @@ export default function BookingModal({
                 onClick={() => setPhone("")}
                 required
                 onChange={(e) => setPhone(e.target.value)}
-                className="booking-name-input"
+                className="booking-name-input ff-b"
                 id="phone"
               />
               <div className="booking-button-cont">
                 <button
                   type="button"
                   onClick={handleCancel}
-                  className="booking-button-submit"
+                  className="booking-button-submit ff-b"
                 >
                   Cancel
                 </button>
@@ -143,8 +143,8 @@ export default function BookingModal({
                   type="submit"
                   className={` ${
                     typeDuration === "60"
-                      ? "booking-button-submit booking-button-submit-60"
-                      : "booking-button-submit booking-button-submit-90"
+                      ? "booking-button-submit ff-b booking-button-submit-60"
+                      : "booking-button-submit ff-b booking-button-submit-90"
                   }`}
                 >
                   Book Now

@@ -74,7 +74,6 @@
   pointer-events: none;
   font-size: min(calc(8px + 1vw), calc(8px + 1.2vh));
   line-height: 1.4;
-  font-family: "Montserrat", sans-serif;
   place-content: center;
   opacity: 0;
   animation: rgFadeIn 1s ease forwards;

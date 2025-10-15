@@ -95,7 +95,7 @@ export default function ReviewGallery({
             >
               {active === i ? (
                 <span
-                  className={`rg-label ${
+                  className={`rg-label ff-m ${
                     active !== null && isActive ? "is-active" : "is-collapsed"
                   }`}
                 >

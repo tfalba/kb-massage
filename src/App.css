@@ -72,7 +72,6 @@
 .Home-banner-title {
   font-size: calc(10px + 10vw);
   color: var(--brand-white);
-  font-family: "Belleza";
   width: 92vw;
   display: flex;
 }
@@ -80,7 +79,6 @@
 .Home-welcome {
   text-align: justify;
   line-height: calc(15px + 1.3vw);
-  font-family: "Montserrat";
   color: var(--brand-green);
   background-color: #ab874252;
   padding: 5vw 18vw;
@@ -102,7 +100,6 @@
   color: var(--brand-white);
   margin-left: 2vw;
   text-decoration: none;
-  font-family: "Montserrat";
   font-size: calc(8px + max(1vw, 1vh));
   font-weight: 200;
 }
@@ -238,14 +235,12 @@
 .About-title {
   font-size: calc(10px + 1.2vw);
   display: flex;
-  font-family: "Montserrat";
   font-weight: 600;
   color: #5d5340;
 }
 
 .About-content {
   font-size: calc(10px + 0.8vw);
-  font-family: "Montserrat";
   text-align: justify;
   margin-top: 0;
 }
@@ -265,7 +260,6 @@
 .About-top-title {
   font-size: calc(10px + 2.5vw);
   color: var(--brand-green);
-  font-family: "Belleza";
 }
 
 .Calendar {
@@ -340,7 +334,6 @@
   color: #555;
   line-height: 1.5;
   font-size: calc(8px + 0.8vw);
-  font-family: "Belleza";
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -363,8 +356,7 @@
   color: var(--brand-white);
   border: none;
   border-radius: 12px;
-  padding: 1vw 1.2vw;
-  font-family: "Belleza";
+  padding: 1vw 1vw;
   cursor: pointer;
   transition: background-color 0.3s ease;
   border: 2px solid #becfb6;
@@ -507,7 +499,6 @@
   cursor: pointer;
   transition: transform 0.08s ease, box-shadow 0.08s ease;
   width: calc(80px + 2vw);
-  font-family: "Belleza";
   font-size: calc(8px + 0.7vw);
   color: var(--brand-white);
 }
