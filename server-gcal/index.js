@@ -60,39 +60,6 @@ const oauth2Client = new google.auth.OAuth2(
 
 const TOKENS_PATH = process.env.TOKENS_PATH || path.resolve(__dirname, "tokens.json");
 
-// async function saveTokens(tokens) {
-//   // Keep minimal set; include refresh_token if present
-//   const current = await loadTokens().catch(() => ({}));
-//   const merged = { ...current, ...tokens }; // preserve existing refresh_token if not re-sent
-//   await fsp.writeFile(TOKENS_PATH, JSON.stringify(merged, null, 2), { mode: 0o600 });
-// }
-
-// async function loadTokens() {
-//   const raw = await fsp.readFile(TOKENS_PATH, "utf-8");
-//   return JSON.parse(raw);
-// }
-
-// function tokensFileExists() {
-//   try { fs.accessSync(TOKENS_PATH, fs.constants.F_OK); return true; } catch { return false; }
-// }
-
-
-// // Load tokens at boot (if saved previously)
-// (async () => {
-//   if (tokensFileExists()) {
-//     try {
-//       const tokens = await loadTokens();
-//       oauth2Client.setCredentials(tokens);
-//       console.log("✅ Loaded saved Google tokens.");
-//     } catch (e) {
-//       console.warn("⚠️ Could not load saved tokens:", e.message);
-//     }
-//   } else {
-//     console.log("ℹ️ No saved tokens yet. Visit /gcal/auth/url to connect.");
-//   }
-// })();
-
-
 /** ensure parent directory exists (important if TOKENS_PATH is under /data/subdir/...) */
 async function ensureDirFor(filePath) {
   const dir = path.dirname(filePath);
@@ -157,29 +124,16 @@ function getAuthedCalendar() {
 // let TOKENS = null;
 
 // ----- Auth endpoints -----
-// const SCOPES = ["https://www.googleapis.com/auth/calendar"];
+const SCOPES = ["https://www.googleapis.com/auth/calendar"];
 
 app.get("/gcal/auth/url", (req, res) => {
   const url = oauth2Client.generateAuthUrl({
     access_type: "offline",     // needed for refresh_token
     prompt: "consent",          // force Google to send refresh_token at least once
-    scope: ["https://www.googleapis.com/auth/calendar"],
+    scope: SCOPES,
   });
   res.json({ url });
 });
-
-// app.get("/gcal/oauth2callback", async (req, res) => {
-//   try {
-//     const { code } = req.query;
-//     const { tokens } = await oauth2Client.getToken(code);
-//     oauth2Client.setCredentials(tokens);
-//     await saveTokens(tokens);
-//     res.send("Google Calendar connected ✅ You can close this tab.");
-//   } catch (e) {
-//     console.error("OAuth error", e);
-//     res.status(500).send("OAuth failed");
-//   }
-// });
 
 app.get("/gcal/oauth2callback", async (req, res) => {
   try {
@@ -374,16 +328,6 @@ app.get("/gcal/auth/status", async (_req, res) => {
   });
 });
 
-// app.get("/gcal/auth/status", async (req, res) => {
-//   const hasFile = tokensFileExists();
-//   const creds = oauth2Client.credentials || {};
-//   res.json({
-//     savedTokensFile: hasFile,
-//     hasRefreshToken: Boolean(creds.refresh_token),
-//     tokenExpiry: creds.expiry_date ? new Date(creds.expiry_date).toISOString() : null,
-//   });
-// });
-
 // Disconnect (revoke) and delete tokens
 app.post("/gcal/auth/disconnect", async (req, res) => {
   try {
@@ -441,7 +385,6 @@ app.post("/gcal/book", async (req, res) => {
 app.get("/gcal/health", (_, res) => res.json({ ok: true }));
 app.get("/", (_, res) => res.send("Booking server up"));
 
-// app.listen(PORT, () => console.log(`Server on http://localhost:${PORT}`));
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });

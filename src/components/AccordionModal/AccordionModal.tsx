@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from "react-modal";
 import "./AccordionModal.css";
-import { slideColors } from "../../data/ServicesData";
+import { slideColors, slideImages } from "../../data/ServicesData";
 
 Modal.setAppElement("#root"); // for accessibility
 
@@ -24,8 +24,9 @@ export default function AccordionModal({
 }: CardProps) {
   return (
     <div
-        className={`${isOpen ? "acc-container acc-container-open" : "acc-container"}`}
-    //   className="acc-container"
+      className={`${
+        isOpen ? "acc-container acc-container-open" : "acc-container"
+      }`}
       style={{
         left: `${10 + idx * 10}px`,
       }}
@@ -37,13 +38,24 @@ export default function AccordionModal({
           backgroundColor: slideColors[idx % 4],
         }}
       >
-        <span className="acc-title ff-m">{title}</span>
+        <span style={{ flex: 2 }} className="acc-title ff-m">
+          {title}
+        </span>
+        <div style={{ flex: 1 }}>
+          <img
+            style={{ width: "max(5vw,5vh)", marginTop: 20 }}
+            src={slideImages[idx].img}
+          />
+        </div>
       </button>
 
       {isOpen && (
         <div
-            className={`${prevOpen>idx || prevOpen === -1 ? "acc-modal-side" : "acc-modal-side acc-side-right"}`}
-        //   className="acc-modal-side"
+          className={`${
+            prevOpen > idx || prevOpen === -1
+              ? "acc-modal-side"
+              : "acc-modal-side acc-side-right"
+          }`}
           style={{ backgroundColor: slideColors[idx % 4] }}
           onClick={() => handleOpen(idx)}
         >
