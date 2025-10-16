@@ -21,6 +21,7 @@ function About() {
       <div className="About-lower-container jcc flex-wrap">
         {aboutMe.slice(1).map((a, i) => (
           <div
+            key={i}
             className={`About-section flex-col ${
               i % 2 === 0 ? "About-section-even" : "About-section-odd"
             }`}
