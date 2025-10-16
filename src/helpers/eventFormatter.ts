@@ -30,54 +30,9 @@ export function nyDayKey(utcIso: string) {
   return `${y}-${m}-${day}`; // e.g., 2025-09-08
 }
 
-// group slots (expects Calendly's { start_time, end_time } items)
-export function groupSlotsByNYDay<T extends { start_time: string; end_time: string }>(slots: T[]) {
-  // sort by start time just in case
-  const sorted = [...slots].sort((a, b) => +new Date(a.start_time) - +new Date(b.start_time));
-  const map = new Map<string, T[]>();
-
-  for (const s of sorted) {
-    const key = nyDayKey(s.start_time);
-    if (!map.has(key)) map.set(key, []);
-    map.get(key)!.push(s);
-  }
-
-  // turn into an array with a readable heading
-  return Array.from(map.entries()).map(([key, items]) => {
-    // heading like "Mon, Sep 8"
-    const heading = nycDateHeading.format(new Date(items[0].start_time));
-    return { key, heading, items };
-  });
-}
-
 export const DAYS = (n: number) => 24 * 60 * 60 * 1000 * n;
 export const HOURS = (n: number) => 60 * 60 * 1000 * n;
 
-export function isoNow() {
-  return new Date().toISOString();
-}
-
-export function isTwoHoursFromNow() {
-    return new Date(Date.now() + HOURS(2)).toISOString();
-}
-
-export function isoDaysFromNow(n: number) {
-  return new Date(Date.now() + DAYS(n)).toISOString();
-}
-
-export function groupSlotsByDayGoog(slots: {start: string; end: string}[], timeZone = "America/New_York") {
-  const fmtDay = new Intl.DateTimeFormat("en-CA", { timeZone, year: "numeric", month: "2-digit", day: "2-digit" });
-  const map = new Map<string, {start: string; end: string}[]>();
-
-  for (const s of slots) {
-    const key = fmtDay.format(new Date(s.start)); // e.g. 2025-09-22
-    if (!map.has(key)) map.set(key, []);
-    map.get(key)!.push(s);
-  }
-  // sort each day's slots
-  for (const [, arr] of map) arr.sort((a, b) => +new Date(a.start) - +new Date(b.start));
-  return map;
-}
 
 export function groupBookingIntoStandard(slot: {start_time: string, end_time: string}) {
     const startDate = new Date(slot.start_time);

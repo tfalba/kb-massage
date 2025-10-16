@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-import { nycTime, nyDayKey } from "../helpers/eventFormatter";
+import { HOURS, nycTime, nyDayKey } from "../helpers/eventFormatter";
 import BookingModal from "./BookingModal/BookingModal";
 import { useAvailability } from "../api";
 import { endOfMonth } from "date-fns";
@@ -100,8 +100,11 @@ export default function CalendarWithSlots({
   // Slots just for the selected day
   const daySlots = useMemo(() => {
     if (!selected) return [];
+    const startDelay = new Date(Date.now() + HOURS(2))
+    
     const key = nyDayKey(selected.toISOString());
     return slots
+      .filter((s) => new Date(s.start_time) > startDelay)
       .filter((s) => nyDayKey(s.start_time) === key)
       .sort((a, b) => +new Date(a.start_time) - +new Date(b.start_time));
   }, [selected, slots]);
