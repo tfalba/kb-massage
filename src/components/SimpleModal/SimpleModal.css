@@ -45,7 +45,7 @@
   writing-mode: vertical-rl;
   width: 4vw;
   place-content: center;
-  font-size: calc(10px + 0.8vw);
+  font-size: calc(10px + min(0.8vw, 0.8vh));
   text-decoration: none;
   color: white;
   font-weight: 600;
