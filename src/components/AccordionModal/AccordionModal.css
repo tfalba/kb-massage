@@ -40,6 +40,7 @@
   justify-content: space-evenly;
   display: flex;
   align-items: center;
+  padding: 1px;
 }
 @media (min-width: 640px) {
   .acc-button {
@@ -52,6 +53,15 @@
   font-size: calc(12px + min(1vh, 1vw));
   color: white;
   font-weight: 200;
+}
+
+.acc-title:hover {
+  font-weight: 600;
+}
+
+.acc-button:hover {
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 @media (min-width: 640px) {
