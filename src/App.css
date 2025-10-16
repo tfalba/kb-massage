@@ -59,11 +59,11 @@
 }
 
 .ff-m {
-    font-family: "Montserrat";
+  font-family: "Montserrat";
 }
 
 .ff-b {
-    font-family: "Belleza";
+  font-family: "Belleza";
 }
 
 .Home-image {
@@ -109,7 +109,7 @@
 }
 
 .Navbar a:hover {
-    color: var(--brand-white);
+  color: var(--brand-white);
 
   /* color: #8ba87c; */
 }
@@ -218,7 +218,7 @@
 
 .About-lower-container {
   padding: 4vw 8vw 8vw 8vw;
-  background-color: var(--brand-white);;
+  background-color: var(--brand-white);
 }
 
 .About-section {
@@ -282,9 +282,7 @@
 .service-wrap {
   display: flex;
   flex-direction: column;
-    background-color: #5d5340;
-
-
+  background-color: #5d5340;
 }
 
 @media (min-width: 640px) {
@@ -292,7 +290,6 @@
     flex-direction: row;
   }
 }
-
 
 .services-title {
   /* text-align: left; */
@@ -302,17 +299,16 @@
   place-content: center;
   font-weight: 400;
   background-color: var(--brand-white);
-      background: radial-gradient(#d2ffaa45, #d7e8e0);
-          background-color: #5d5340;
+  /* background: radial-gradient(#d2ffaa45, #d7e8e0); */
+  background-color: var(--brand-green);
   color: var(--brand-green);
-  color: #5d5340;
+  /* color: #5d5340; */
 }
 
 @media (min-width: 640px) {
   .services-title {
-  text-align: center;
+    text-align: center;
   }
-
 }
 
 .service-card {
@@ -407,7 +403,6 @@
 .EventTypes-container {
   width: 100%;
   background-color: var(--brand-white);
-
 }
 
 .EventTypes-close {
@@ -430,7 +425,6 @@
   justify-content: space-between;
   align-items: flex-start;
 }
-
 
 .dc-title {
   text-align: center;
@@ -499,7 +493,6 @@
   padding: 3vw;
   flex: 1;
   min-width: 45%;
-
 }
 .slot-list {
   gap: 0.5rem 0.75rem;
