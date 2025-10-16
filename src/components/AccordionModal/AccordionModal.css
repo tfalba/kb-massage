@@ -5,51 +5,57 @@
   --acc-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-
 .acc-container {
-    display: flex;
-    flex-direction: column;
-    top: 0;
-    height: 10vh;
-    /* height: 62vh; */
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  height: 10vh;
 }
-
 
 @media (min-width: 640px) {
   .acc-container {
     height: 62vh;
-    max-height: 650px;
+    height: max(62vh, 300px);
+    max-height: 800px;
     flex-direction: row;
   }
 }
 
 .acc-container-open {
-    height: 45vh;
+  height: 45vh;
 }
 
 @media (min-width: 640px) {
   .acc-container-open {
     height: 62vh;
+    height: max(62vh, 300px);
+    max-height: 800px;
   }
 }
 
 .acc-button {
-    border: none;
-    height: 100%;
-    flex: 1;
+  border: none;
+  height: 100%;
+  flex: 1;
+  justify-content: space-evenly;
+  display: flex;
 }
-
-.acc-title {
-    width: 6vw;
-    place-content: center;
-    font-size: calc(14px + min(1vh, 1vw));
-    color: white;
-    font-weight: 200;
+@media (min-width: 640px) {
+  .acc-button {
+    flex-direction: column;
+  }
+}
+.acc-button .acc-title {
+  width: 6vw;
+  place-content: center;
+  font-size: calc(12px + min(1vh, 1vw));
+  color: white;
+  font-weight: 200;
 }
 
 @media (min-width: 640px) {
   .acc-title {
-        writing-mode: vertical-rl;
+    writing-mode: vertical-rl;
   }
 }
 
@@ -69,7 +75,7 @@
 .acc-modal-side {
   position: relative;
   flex: 1 1 0%;
-  flex: 7;
+  flex: 6;
   min-width: var(--min-collapsed, 40px);
   background: #8ba87c;
   overflow: hidden;
@@ -79,25 +85,16 @@
   display: flex;
 }
 
-.acc-side-right {}
+.acc-side-right {
+}
 
 @media (min-width: 640px) {
   .acc-modal-side {
-  /* position: relative;
-  flex: 1 1 0%;
-  flex: 7;
-  min-width: var(--min-collapsed, 40px);
-  background: #8ba87c;
-  overflow: hidden;
-  height: 100%;
-  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2); */
-  animation: accSlideIn 0.5s ease-in;
-  /* display: flex;  */
- }
- .acc-side-right {
+    animation: accSlideIn 0.5s ease-in;
+  }
+  .acc-side-right {
     animation: accSlideInR 0.5s ease-in;
-
- }
+  }
 }
 
 .acc-button-slide {
@@ -117,30 +114,33 @@
 @keyframes accSlideIn {
   from {
     transform: translateX(-20%);
+    opacity: 0;
   }
 
   to {
     transform: translateX(0);
+    opacity: 1;
   }
 }
 
 @keyframes accSlideInR {
-    from {
-        transform: translateX(10%);
-
-    }
-    to {
-        transform: translateX(0);
-    }
+  from {
+    transform: translateX(10%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 @keyframes accSlideUp {
-    from {
-        transform: translateY(-20%);
-    }
-    to {
-        transform: translateY(0);
-    }
+  from {
+    transform: translateY(-20%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
 @keyframes accSlideOut {

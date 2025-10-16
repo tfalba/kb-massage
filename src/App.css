@@ -272,12 +272,14 @@
 }
 
 .services-wrap {
-  background-color: #5d5340;
+  background-color: var(--brand-white);
 }
 
 .service-wrap {
   display: flex;
   flex-direction: column;
+    background-color: #5d5340;
+
 
 }
 
@@ -289,8 +291,14 @@
 
 
 .services-title {
-  text-align: left;
+  /* text-align: left; */
+  height: max(10vh, 10vw);
   padding: 2vw 4vw;
+  place-content: center;
+  font-weight: 400;
+  background-color: var(--brand-white);
+      background: radial-gradient(#d2ffaa45, #d7e8e0);
+  color: var(--brand-green);
 }
 
 @media (min-width: 640px) {
@@ -306,6 +314,7 @@
   overflow: hidden;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   margin: 2vw;
+  padding: 2vw;
 }
 
 .service-media {
