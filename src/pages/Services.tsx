@@ -4,7 +4,7 @@ import { services } from '../data/ServicesData';
 
 
 export default function Services() {
-    const [isOpen, setIsOpen] = useState<number>(services.length - 1);
+    const [isOpen, setIsOpen] = useState<number>(- 1);
     const [prevOpen, setPrevOpen] = useState<number>(0)
     function handleChange(index: number) {
         if (index === isOpen) {
