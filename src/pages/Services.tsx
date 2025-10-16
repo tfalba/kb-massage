@@ -21,6 +21,20 @@ export default function Services() {
       <section className="services-wrap">
         <h2 className="services-title m0">Massage Services</h2>
         <div className="service-wrap">
+              <div
+            className={`${isOpen !== -1 ? "display-none" : "ff-b Home-image"}`}
+            style={{
+              width: "100%",
+              height: 'auto',
+              minHeight: "30vh",
+              placeContent: "center",
+              textAlign: "center",
+              fontSize: "calc(12px + 2vw)",
+              color: "white",
+            }}
+          >
+            Learn more about our services
+          </div>
           {services.map((service, idx) => (
             <AccordionModal
               key={idx}
@@ -56,6 +70,18 @@ export default function Services() {
               </article>
             </AccordionModal>
           ))}
+          {/* <div
+            className={`${isOpen !== -1 ? "display-none" : "ff-b"}`}
+            style={{
+              width: "100%",
+              placeContent: "center",
+              textAlign: "center",
+              fontSize: "calc(12px + 2vw)",
+              color: "white",
+            }}
+          >
+            Learn more about our services
+          </div> */}
         </div>
         <div
           style={{
@@ -63,6 +89,7 @@ export default function Services() {
             height: "auto",
             padding: "6vw 8vw",
             fontSize: "calc(8px + max(1vw, 1vh))",
+            background: "radial-gradient(#d2ffaa45, #d7e8e0)",
           }}
           className="services-title ff-m"
         >

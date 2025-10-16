@@ -43,7 +43,7 @@ export default function AccordionModal({
         </span>
         <div style={{ flex: 1 }}>
           <img
-            style={{ width: "max(5vw,5vh)", marginTop: 20 }}
+            style={{ width: "max(5vw,5vh)"}}
             src={slideImages[idx].img}
           />
         </div>
@@ -52,7 +52,9 @@ export default function AccordionModal({
       {isOpen && (
         <div
           className={`${
-            prevOpen > idx || prevOpen === -1
+                        prevOpen > idx
+
+            // prevOpen > idx || prevOpen === -1
               ? "acc-modal-side"
               : "acc-modal-side acc-side-right"
           }`}

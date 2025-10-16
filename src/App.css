@@ -12,6 +12,10 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+.display-none {
+  display: none;
+}
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -293,12 +297,15 @@
 .services-title {
   /* text-align: left; */
   height: max(10vh, 10vw);
+  height: 5vh;
   padding: 2vw 4vw;
   place-content: center;
   font-weight: 400;
   background-color: var(--brand-white);
       background: radial-gradient(#d2ffaa45, #d7e8e0);
+          background-color: #5d5340;
   color: var(--brand-green);
+  color: #5d5340;
 }
 
 @media (min-width: 640px) {
