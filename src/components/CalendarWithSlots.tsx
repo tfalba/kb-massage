@@ -145,7 +145,7 @@ export default function CalendarWithSlots({
         />
       </div>
 
-      <div className="slots flex-col">
+      <div className="slots flex flex-col">
         {(loading1 || loading2) && <p>Loading availability…</p>}
         {error1 && <p style={{ color: "crimson" }}>{error1}</p>}
         {error2 && <p style={{ color: "crimson" }}>{error2}</p>}
@@ -164,7 +164,7 @@ export default function CalendarWithSlots({
             >
               ‹
             </button>
-            <div className="dc-title flex-col m0 fs-main">
+            <div className="dc-title flex flex-col m0 fs-main">
               {selected?.toLocaleDateString()}
             </div>
             <button

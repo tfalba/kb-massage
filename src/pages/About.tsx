@@ -6,12 +6,12 @@ function About() {
     <main className="About-container">
       <div className="About-top-container jcc aic flex flex-wrap">
         <img
-          className="About-image flex-col aic"
+          className="About-image flex flex-col aic"
           src={headshot}
           alt="tf mortgage services"
         />
 
-        <div className="About-top-section flex-col jcc">
+        <div className="About-top-section flex flex-col jcc">
           <p className="About-top-title m0 ff-b">Kara Bazemore</p>
           <p className="About-title ff-m">{aboutMe[0].title}</p>
 
@@ -22,7 +22,7 @@ function About() {
         {aboutMe.slice(1).map((a, i) => (
           <div
             key={i}
-            className={`About-section flex-col ${
+            className={`About-section flex flex-col ${
               i % 2 === 0 ? "About-section-even" : "About-section-odd"
             }`}
           >

@@ -18,8 +18,8 @@ export default function Services() {
 
   return (
     <main>
-      <section className="services-wrap">
-        <h2 className="services-title m0">{""}</h2>
+      <section>
+        <h2 className="services-title">{""}</h2>
         <div className="flex flex-col md:flex-row bg-earth ">
               <div
             className={`${isOpen !== -1 ? "display-none" : "ff-b Home-image flex-[9]"}`}
@@ -44,7 +44,10 @@ export default function Services() {
               isOpen={isOpen === idx}
               handleOpen={() => handleChange(idx)}
             >
-              <article className="service-card flex flex-col sm:flex-row md:flex-col lg:flex-row aic" key={idx}>
+              <article
+                className="service-card flex flex-col items-center gap-2 motion-safe:animate-service-text sm:flex-row md:flex-col lg:flex-row lg:items-stretch"
+                key={idx}
+              >
                 <div className="service-media" style={{ flex: "1" }}>
                   <img
                     style={{
@@ -56,16 +59,11 @@ export default function Services() {
                     loading="lazy"
                   />
                 </div>
-                <div
-                  style={{
-                    flex: "2",
-                    maxHeight: "92%",
-                    overflowY: "scroll",
-                    placeContent: "center",
-                  }}
-                >
+                <div className="flex flex-[2] max-h-[92%] flex-col gap-2 overflow-y-auto py-2">
                   <h3 className="service-name">{service.name}</h3>
-                  <p className="service-desc ff-b">{service.description}</p>
+                  <p className="service-desc ff-b leading-relaxed">
+                    {service.description}
+                  </p>
                 </div>
               </article>
             </AccordionModal>
