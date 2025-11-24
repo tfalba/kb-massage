@@ -53,6 +53,10 @@ export default {
           "0%": { transform: "rotateY(0deg)" },
           "100%": { transform: "rotateY(360deg)" },
         },
+        "service-text-in": {
+          "0%": { opacity: "0", transform: "translateY(12px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
       },
       animation: {
         "accordion-slide-in": "accordion-slide-in 0.5s ease-in both",
@@ -63,6 +67,7 @@ export default {
         "gallery-fade-in": "gallery-fade-in 1s ease forwards",
         "review-spin-x": "review-spin-x 3s ease-in-out forwards",
         "review-spin-y": "review-spin-y 3s ease-in-out forwards",
+        "service-text": "service-text-in 0.45s ease-out both",
       },
       boxShadow: {
         "accordion-panel": "-2px 0 10px rgba(0, 0, 0, 0.2)",

@@ -239,7 +239,6 @@
   justify-content: space-between;
   width: 100vw;
   height: calc(max(12vw, 12vh, 105px));
-  /* padding-right: calc(max(8vw, 8vh, 70px)); */
   z-index: 1000;
 }
 
@@ -253,8 +252,6 @@
 
 .Navbar a:hover {
   color: var(--brand-white);
-
-  /* color: #8ba87c; */
 }
 
 .Navbar-links {
@@ -411,14 +408,9 @@
 
 .Calendar {
   width: 100vw;
-  /* width: 100%; */
   height: max-content;
   display: flex;
   padding: 0rem 0rem 0vw 0rem;
-  background-color: var(--brand-white);
-}
-
-.services-wrap {
   background-color: var(--brand-white);
 }
 
@@ -435,23 +427,9 @@
 }
 
 .services-title {
-  /* text-align: left; */
-  height: max(10vh, 10vw);
   height: 5vh;
   padding: 2vw 4vw;
-  place-content: center;
-  font-weight: 400;
-  background-color: var(--brand-white);
-  /* background: radial-gradient(#d2ffaa45, #d7e8e0); */
   background-color: var(--brand-green);
-  color: var(--brand-green);
-  /* color: #5d5340; */
-}
-
-@media (min-width: 640px) {
-  .services-title {
-    text-align: center;
-  }
 }
 
 .service-card {
