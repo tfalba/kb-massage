@@ -50,6 +50,13 @@ export const services = [
 
 export const slideColors = ["#414b3b", "#ab8742", "#8ca87c", "#b68e8c"];
 
+export const slideColorThemes = [
+  "bg-brand-forest",
+  "bg-brand-copper",
+  "bg-brand-sage",
+  "bg-brand-rose",
+];
+
 export const slideImages = [
   { img: icon0 },
   { img: icon1 },

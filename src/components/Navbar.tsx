@@ -7,7 +7,7 @@ export default function Navbar() {
     <nav className="Navbar aic ff-m">
       <img className="Navbar-logo logo" src={logo} alt="the top " />
 
-      <div className="Navbar-links flex-col">
+      <div className="flex flex-col items-end justify-between">
         <Link className={pathname === "/" ? "Navbar-active" : ""} to="/">
           Home
         </Link>

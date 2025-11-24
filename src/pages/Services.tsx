@@ -19,10 +19,10 @@ export default function Services() {
   return (
     <main>
       <section className="services-wrap">
-        <h2 className="services-title m0">Massage Services</h2>
-        <div className="service-wrap">
+        <h2 className="services-title m0">{""}</h2>
+        <div className="flex flex-col md:flex-row bg-earth ">
               <div
-            className={`${isOpen !== -1 ? "display-none" : "ff-b Home-image"}`}
+            className={`${isOpen !== -1 ? "display-none" : "ff-b Home-image flex-[9]"}`}
             style={{
               width: "100%",
               height: 'auto',
@@ -44,7 +44,7 @@ export default function Services() {
               isOpen={isOpen === idx}
               handleOpen={() => handleChange(idx)}
             >
-              <article className="service-card flex-col aic" key={idx}>
+              <article className="service-card flex flex-col sm:flex-row md:flex-col lg:flex-row aic" key={idx}>
                 <div className="service-media" style={{ flex: "1" }}>
                   <img
                     style={{
