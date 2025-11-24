@@ -8,7 +8,6 @@ export default function Services() {
   function handleChange(index: number) {
     if (index === isOpen) {
       setPrevOpen(index);
-      console.log("setting to null");
       setIsOpen(-1);
     } else {
       setIsOpen(index);
@@ -16,97 +15,58 @@ export default function Services() {
     }
   }
 
+  const heroPanel =
+    isOpen !== -1
+      ? "hidden"
+      : "flex w-full flex-[9] min-h-[30vh] bg-[url('/src/assets/massage-banner.png')] bg-cover bg-center bg-no-repeat";
+
   return (
-    <main>
+    <main className="w-full">
       <section>
-        <h2 className="services-title">{""}</h2>
-        <div className="flex flex-col md:flex-row bg-earth ">
-              <div
-            className={`${isOpen !== -1 ? "display-none" : "ff-b Home-image flex-[9]"}`}
-            style={{
-              width: "100%",
-              height: 'auto',
-              minHeight: "30vh",
-              placeContent: "center",
-              textAlign: "center",
-              fontSize: "calc(12px + 2vw)",
-              color: "white",
-            }}
+        <h2 className="sr-only">Massage Services</h2>
+        <div className="flex flex-col bg-brand-forest text-white md:flex-row pt-[min(50px,20vh)]">
+          <div
+            className={`${heroPanel} grid place-content-center px-6 py-10 text-center font-belleza text-[clamp(1.5rem,2.4vw,3.5rem)]`}
           >
             Learn more about our services
           </div>
           {services.map((service, idx) => (
             <AccordionModal
-              key={idx}
+              key={service.name}
               title={service.name}
               idx={idx}
               prevOpen={prevOpen}
               isOpen={isOpen === idx}
               handleOpen={() => handleChange(idx)}
             >
-              <article
-                className="service-card flex flex-col items-center gap-2 motion-safe:animate-service-text sm:flex-row md:flex-col lg:flex-row lg:items-stretch"
-                key={idx}
-              >
-                <div className="service-media" style={{ flex: "1" }}>
-                  <img
-                    style={{
-                      height:
-                        service.name === "Sweedish Massage" ? "105%" : "100%",
-                    }}
-                    src={service.img}
-                    alt={service.name}
-                    loading="lazy"
-                  />
+              <article className="m-[2vw] flex flex-col items-center gap-4 rounded-[14px] bg-brand-cream p-[2vw] text-brand-earth shadow-md motion-safe:animate-service-text sm:flex-row md:flex-col lg:flex-row">
+                <div className="flex w-auto flex-1 flex-col">
+                  <div className="aspect-[3/2] overflow-hidden">
+                    <img
+                      className={`h-full w-full p-[1vw] object-contain ${
+                        service.name === "Sweedish Massage"
+                          ? "scale-[1.05]"
+                          : "scale-100"
+                      }`}
+                      src={service.img}
+                      alt={service.name}
+                      loading="lazy"
+                    />
+                  </div>
                 </div>
-                <div className="flex flex-[2] max-h-[92%] flex-col gap-2 overflow-y-auto py-2">
-                  <h3 className="service-name">{service.name}</h3>
-                  <p className="service-desc ff-b leading-relaxed">
+                <div className="flex max-h-[92%] flex-[2] flex-col gap-3 overflow-y-auto py-2">
+                  <h3 className="text-[clamp(1.1rem,1.6vw,2rem)] font-belleza text-brand-forest">
+                    {service.name}
+                  </h3>
+                  <p className="font-montserrat text-[clamp(0.9rem,1.1vw,1.25rem)] leading-relaxed text-[#555]">
                     {service.description}
                   </p>
                 </div>
               </article>
             </AccordionModal>
           ))}
-          {/* <div
-            className={`${isOpen !== -1 ? "display-none" : "ff-b"}`}
-            style={{
-              width: "100%",
-              placeContent: "center",
-              textAlign: "center",
-              fontSize: "calc(12px + 2vw)",
-              color: "white",
-            }}
-          >
-            Learn more about our services
-          </div> */}
         </div>
-        <div
-          style={{
-            textAlign: "justify",
-            height: "auto",
-            padding: "6vw 8vw",
-            fontSize: "calc(8px + max(1vw, 1vh))",
-            background: "radial-gradient(#d2ffaa45, #d7e8e0)",
-          }}
-          className="services-title ff-m"
-        >
-          {/* At Kara Bazemore Massage Therapy, every service is thoughtfully
-          designed to support your body’s natural ability to heal, restore, and
-          thrive. Whether you’re seeking deep therapeutic relief, total
-          relaxation, or a tailored blend of techniques, each session reflects
-          years of training, refined skill, and genuine care. From the calming
-          flow of Swedish massage to the precision of deep tissue, the athletic
-          recovery of sports massage, and the tranquil warmth of hot stone
-          therapy, our work is rooted in expertise and intuition. Every
-          treatment is customized to your goals, your comfort level, and your
-          unique physiology — ensuring you receive not just a massage, but a
-          transformative experience. We take pride in providing the highest
-          level of professionalism, consistency, and attention to detail. Your
-          session is never rushed; it’s crafted to be exactly what your body
-          needs that day. You’ll leave feeling balanced, restored, and deeply
-          renewed — because we believe that every client deserves nothing less
-          than a perfect session. */}
+        <div className="bg-[radial-gradient(#d2ffaa45,#d7e8e0)] px-[8vw] py-[6vw] text-justify font-montserrat text-[clamp(1rem,1.3vw,1.6rem)] text-brand-forest">
           At Kara Bazemore Massage Therapy, every session is a blend of skill,
           intuition, and years of professional training. Our techniques are
           designed to relieve tension, restore balance, and promote lasting

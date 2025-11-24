@@ -24,8 +24,8 @@ export default function AccordionModal({
   const colorClass =
     slideColorThemes[idx % slideColorThemes.length] ?? "bg-brand-forest";
   const containerBase =
-    "flex top-0 h-auto flex-col flex-1 transition-accordion duration-[850ms] ease-accordion min-h-auto sm:h-[min(520px,100vh)] sm:max-h-[800px] md:flex-row";
-  const containerState = isOpen ? "h-[45vh] sm:h-[62vh] flex-[12]" : "";
+    "flex top-0 h-auto flex-col flex-1 transition-accordion duration-[850ms] ease-accordion min-h-auto sm:h-[min(580px,100vh)] sm:max-h-[800px] md:flex-row";
+  const containerState = isOpen ? "h-[55vh] sm:h-[62vh] sm:min-h-[500px] flex-[12]" : "";
   const panelAnimation =
     prevOpen > idx
       ? "md:animate-accordion-slide-in"
@@ -47,7 +47,7 @@ export default function AccordionModal({
         >
           {title}
         </span>
-        <div className="flex flex-1 items-center justify-center">
+        <div className="flex flex-1 items-center justify-center p-2">
           <img
             className="w-[max(5vw,5vh)]"
             src={slideImages[idx].img}
