@@ -29,7 +29,7 @@ export default function EventTypes() {
         <div className="EventTypes-header m0">
           <h2 className="EventTypes-title m0">Booking Options </h2>
 
-          <ul className="EventTypes-outer flex-wrap m0">
+          <ul className="EventTypes-outer flex flex-wrap m0">
             {newTypes.map((t, i) => (
               <li className="EventTypes-inner" key={i}>
                 <button

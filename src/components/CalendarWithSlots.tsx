@@ -116,7 +116,7 @@ export default function CalendarWithSlots({
   }, [loading1, loading2, error1, error2]);
 
   return (
-    <section className="cal-slots flex-wrap jcc">
+    <section className="cal-slots flex flex-wrap jcc">
       <div className="cal">
         <DayPicker
           mode="single"
@@ -183,7 +183,7 @@ export default function CalendarWithSlots({
           <p>No times available for this day.</p>
         )}
         {notLoadOrError && selected && daySlots.length > 0 && (
-          <ul className="slot-list flex-wrap jcc m0">
+          <ul className="slot-list flex flex-wrap jcc m0">
             {daySlots.map((s, i) => (
               <li key={i}>
                 <button

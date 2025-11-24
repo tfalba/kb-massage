@@ -4,7 +4,7 @@ import { aboutMe } from "../data/AboutMeData";
 function About() {
   return (
     <main className="About-container">
-      <div className="About-top-container jcc aic flex-wrap">
+      <div className="About-top-container jcc aic flex flex-wrap">
         <img
           className="About-image flex-col aic"
           src={headshot}
@@ -18,7 +18,7 @@ function About() {
           <p className="About-content ff-m">{aboutMe[0].content}</p>
         </div>
       </div>
-      <div className="About-lower-container jcc flex-wrap">
+      <div className="About-lower-container jcc flex flex-wrap">
         {aboutMe.slice(1).map((a, i) => (
           <div
             key={i}

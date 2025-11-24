@@ -6,9 +6,9 @@ export default function Footer() {
     <footer>
       <img className="logo" src={logo} alt="kb logo" loading="lazy" />
 
-      <div className="Navbar-links flex-col">
+      <div className="flex flex-col items-end justify-center">
         <img
-          className="Footer-image flex-col aic"
+          className="Footer-image flex flex-col aic"
           src={headshot}
           alt="kara bazemore"
           loading="lazy"
