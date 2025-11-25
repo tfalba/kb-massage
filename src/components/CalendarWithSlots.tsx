@@ -125,7 +125,7 @@ export default function CalendarWithSlots({
 
   return (
     <section className="flex flex-wrap justify-center gap-6 px-[2vw] py-[3vw]">
-      <div className="rounded-[18px] bg-white p-[2vw] shadow-lg">
+      <div className={`rounded-[18px] bg-white p-[2vw] ${type.duration === "60" ? "shadow-glow" : "shadow-glowBlue"}`}>
         <DayPicker
           mode="single"
           selected={selected}
@@ -153,7 +153,7 @@ export default function CalendarWithSlots({
         />
       </div>
 
-      <div className="flex min-w-[45%] flex-1 flex-col gap-4 rounded-[18px] bg-white p-[3vw] shadow-lg">
+      <div className="flex min-w-[45%] flex-1 flex-col gap-4 rounded-[18px] bg-white p-[3vw] shadow-glow">
         {(loading1 || loading2) && (
           <p className="font-montserrat text-brand-forest/80">
             Loading availability…

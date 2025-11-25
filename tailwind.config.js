@@ -78,6 +78,12 @@ export default {
       boxShadow: {
         "accordion-panel": "-2px 0 10px rgba(0, 0, 0, 0.2)",
         "booking-panel": "-2px 0 10px rgba(0, 0, 0, 0.5)",
+        soft: "0 4px 20px rgba(0,0,0,0.08)",
+        heavy: "0 10px 40px rgba(0,0,0,0.3)",
+        pop: "0 6px 0px rgba(0,0,0,0.3)",     // lifted card
+        // glow: "0 0 15px rgba(255, 200, 0, 0.7)", // colored glow
+        glow: "0 3px 3px 2px  rgba(140, 168, 124, 0.4)",
+        glowBlue: "-1px 3px 3px 2px rgba(109, 176, 212, 0.4)",
       },
       transitionTimingFunction: {
         accordion: "cubic-bezier(0.2, 0.7, 0.2, 1)",

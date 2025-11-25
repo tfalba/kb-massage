@@ -101,7 +101,7 @@ export default function BookingModal({
         </h4>
         <form
           onSubmit={handleBooking}
-          className="mt-2 flex w-full max-w-[380px] flex-col rounded-[18px] bg-white p-[2vw] shadow-lg"
+          className={`mt-2 flex w-full max-w-[380px] flex-col rounded-[18px] bg-white p-[2vw] ${typeDuration === "60" ? "shadow-glow" : "shadow-glowBlue"}`}
         >
           <label
             className="mt-3 text-left font-belleza text-[clamp(1.1rem,1.5vw,2.2rem)] text-brand-forest"
