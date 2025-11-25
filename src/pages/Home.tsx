@@ -6,7 +6,7 @@ import ReviewGallery from "../components/ReviewGallery/ReviewGallery";
 function Home() {
   return (
     <main className="w-full bg-brand-cream">
-      <div className="hero-banner flex min-h-[min(80vh,50vw)] flex-col items-center justify-center bg-[url('/src/assets/massage-banner.png')] bg-cover bg-center text-white">
+      <div className="flex min-h-[min(80vh,50vw)] flex-col items-center justify-center bg-[url('/src/assets/massage-banner.png')] bg-cover bg-center text-white motion-safe:animate-hero-slide-up">
         <div className="flex w-[92vw] justify-center font-belleza text-[clamp(2.5rem,10vw,8rem)]">
           Find Your Bliss
         </div>

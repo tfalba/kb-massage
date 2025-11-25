@@ -58,6 +58,10 @@ export default {
           "0%": { opacity: "0", transform: "translateY(12px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        "hero-slide-up": {
+          "0%": { transform: "translateY(100%)", opacity: "0" },
+          "100%": { transform: "translateY(0)", opacity: "1" },
+        },
       },
       animation: {
         "accordion-slide-in": "accordion-slide-in 0.5s ease-in both",
@@ -69,6 +73,7 @@ export default {
         "review-spin-x": "review-spin-x 3s ease-in-out forwards",
         "review-spin-y": "review-spin-y 3s ease-in-out forwards",
         "service-text": "service-text-in 0.45s ease-out both",
+        "hero-slide-up": "hero-slide-up 1.2s ease-out forwards",
       },
       boxShadow: {
         "accordion-panel": "-2px 0 10px rgba(0, 0, 0, 0.2)",
