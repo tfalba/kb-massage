@@ -15,7 +15,7 @@ export function useAvailability(
   useEffect(() => {
     const ac = new AbortController();
 
-    async function run() {
+    async function run(attempt: number = 1) {
       setLoading(true);
       setError(null);
       try {
@@ -30,8 +30,14 @@ export function useAvailability(
         const json = await res.json();
         if (!ac.signal.aborted) setData(json);
       } catch (e: any) {
-        if (!ac.signal.aborted)
-          setError(e.message || "Failed to load availability");
+        if (ac.signal.aborted) return;
+        if (attempt < 2) {
+          setTimeout(() => {
+            run(attempt + 1);
+          }, 1200);
+          return;
+        }
+        setError(e.message || "Failed to load availability");
       } finally {
         if (!ac.signal.aborted) {
           setLoading(false);
@@ -41,7 +47,7 @@ export function useAvailability(
 
     run();
     return () => ac.abort();
-  }, [startISO, endISO]);
+  }, [startISO, endISO, duration]);
 
   return { data, loading, error };
 }
