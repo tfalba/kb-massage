@@ -39,7 +39,6 @@ export default function AccordionGallery({
             } else {
               next = (prev + 1) % slides.length;
             }
-            // next = Math.floor(Math.random() * images.length);
           }
           return next;
         });
@@ -53,9 +52,9 @@ export default function AccordionGallery({
   }, [manual]);
 
   return (
-    <section className="PhotoGrid-section">
+    <section className="bg-[radial-gradient(#d2ffaa45,#e6abab)] px-4 py-6 text-center sm:px-0 sm:py-8">
       <div
-        className="m-[3vw] flex h-[clamp(220px,120vh,120vh)] max-w-full flex-col sm:flex-row gap-[2vw] sm:h-[clamp(220px,40vh,460px)]"
+        className="m-[3vw] flex h-[clamp(220px,120vh,120vh)] max-w-full flex-col gap-[2vw] sm:h-[clamp(220px,40vh,460px)] sm:flex-row"
         style={
           {
             "--min-expanded": `${minExpanded}px`,
@@ -108,11 +107,11 @@ export default function AccordionGallery({
                 }}
               />
               <span
-                className={`${
+                className={`pointer-events-none ${
                   active !== null && isActive
                     ? "grid animate-gallery-fade-in"
                     : "hidden"
-                } pointer-events-none absolute top-1/2 -translate-y-1/2 place-content-center px-4 py-6 font-belleza text-[clamp(0.8rem,1.9vw,2.2rem)] font-semibold text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)]`}
+                } absolute top-1/2 -translate-y-1/2 place-content-center px-4 py-6 font-belleza text-[clamp(0.8rem,1.9vw,2.2rem)] font-semibold text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.55)]`}
                 style={{
                   background:
                     "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.45) 100%)",

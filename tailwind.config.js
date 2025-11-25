@@ -18,6 +18,7 @@ export default {
           earth: "#5d5340",
           mist: "#ecefea",
           sand: "#f7f1e6",
+          ocean: "#6db0d4",
         },
       },
       fontFamily: {

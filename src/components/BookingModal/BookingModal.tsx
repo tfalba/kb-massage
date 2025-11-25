@@ -75,21 +75,21 @@ export default function BookingModal({
   if (!open) return null;
 
   const buttonBase =
-    "rounded-[12px] border border-transparent px-4 py-2 font-belleza text-[clamp(0.9rem,1vw,1.2rem)] text-white shadow-sm transition-colors duration-200";
+    "rounded-[12px]  px-4 py-2 font-belleza text-[clamp(0.9rem,1vw,1.2rem)] shadow-sm transition-colors duration-200";
 
   return (
     <div
-      className="fixed inset-0 z-[1000] flex justify-end bg-[#4140406e]"
+      className="fixed inset-0 z-[1000] flex justify-end bg-black/40"
       onClick={handleCancel}
     >
       <div
-        className="flex max-h-screen w-full max-w-[420px] flex-col items-center overflow-y-auto bg-brand-mist px-[2vw] pb-[4vw] pt-[2vw] shadow-booking-panel animate-booking-slide-in sm:px-8"
+        className="flex max-h-screen w-full max-w-[480px] flex-col items-center overflow-y-auto border-l border-brand-sage/30 bg-gradient-to-b from-white via-brand-cream to-brand-mist px-[2vw] pb-[4vw] pt-[2vw] shadow-booking-panel animate-booking-slide-in sm:px-8"
         onClick={(e) => e.stopPropagation()}
       >
         <h2 className="m-0 flex w-full items-center justify-between font-montserrat text-[clamp(1.2rem,2vw,2.2rem)] text-brand-forest">
           {typeDuration} Min Session
           <button
-            className="cursor-pointer border-0 bg-transparent font-montserrat text-[clamp(1rem,1.5vw,1.8rem)] text-brand-forest"
+            className="cursor-pointer border-0 bg-transparent font-montserrat text-[clamp(1.8rem,2.6vw,2.3rem)] text-brand-forest"
             onClick={handleCancel}
             type="button"
           >
@@ -101,26 +101,26 @@ export default function BookingModal({
         </h4>
         <form
           onSubmit={handleBooking}
-          className="mt-2 flex w-full max-w-[380px] flex-col px-[4vw]"
+          className="mt-2 flex w-full max-w-[380px] flex-col rounded-[18px] bg-white p-[2vw] shadow-lg"
         >
           <label
-            className="mt-5 text-left font-belleza text-[clamp(0.95rem,1vw,1.2rem)] text-brand-forest"
+            className="mt-3 text-left font-belleza text-[clamp(1.1rem,1.5vw,2.2rem)] text-brand-forest"
             htmlFor="name"
           >
             Name
           </label>
           <input
             value={name}
-            placeholder="Name"
+            placeholder="enter name"
             type="text"
             onClick={() => setName("")}
             required
             onChange={(e) => setName(e.target.value)}
-            className="h-[30px] border-0 bg-white pl-2 font-belleza text-[clamp(0.9rem,1vw,1.1rem)] text-brand-forest outline-none focus:ring-2 focus:ring-brand-forest/30"
+            className="h-[30px] border border-brand-forest/20 bg-brand-cream rounded-[8px] pl-2 font-belleza text-[clamp(0.9rem,1vw,1.1rem)] text-brand-forest outline-none focus:ring-2 focus:ring-brand-forest/30"
             id="name"
           />
           <label
-            className="mt-5 text-left font-belleza text-[clamp(0.95rem,1vw,1.2rem)] text-brand-forest"
+            className="mt-5 text-left font-belleza text-[clamp(1.1rem,1.5vw,2.2rem)] text-brand-forest"
             htmlFor="email"
           >
             Email
@@ -128,34 +128,34 @@ export default function BookingModal({
           <input
             required
             value={email}
-            placeholder="Email"
+            placeholder="enter email"
             type="email"
             onClick={() => setEmail("")}
             onChange={(e) => setEmail(e.target.value)}
-            className="h-[30px] border-0 bg-white pl-2 font-belleza text-[clamp(0.9rem,1vw,1.1rem)] text-brand-forest outline-none focus:ring-2 focus:ring-brand-forest/30"
+            className="h-[30px] border border-brand-forest/20 bg-brand-cream rounded-[8px] pl-2 font-belleza text-[clamp(0.9rem,1vw,1.1rem)] text-brand-forest outline-none focus:ring-2 focus:ring-brand-forest/30"
             id="email"
           />
           <label
-            className="mt-5 text-left font-belleza text-[clamp(0.95rem,1vw,1.2rem)] text-brand-forest"
+            className="mt-5 text-left font-belleza text-[clamp(1.1rem,1.5vw,2.2rem)] text-brand-forest"
             htmlFor="phone"
           >
             Phone
           </label>
           <input
             value={phone}
-            placeholder="Phone"
+            placeholder="enter phone"
             type="tel"
             onClick={() => setPhone("")}
             required
             onChange={(e) => setPhone(e.target.value)}
-            className="h-[30px] border-0 bg-white pl-2 font-belleza text-[clamp(0.9rem,1vw,1.1rem)] text-brand-forest outline-none focus:ring-2 focus:ring-brand-forest/30"
+            className="h-[30px] border border-brand-forest/20 bg-brand-cream pl-2 rounded-[8px] font-belleza text-[clamp(0.9rem,1vw,1.1rem)] text-brand-forest outline-none focus:ring-2 focus:ring-brand-forest/30"
             id="phone"
           />
-          <div className="mt-10 flex items-center justify-evenly gap-4">
+          <div className="mt-8 flex items-center justify-center gap-6">
             <button
               type="button"
               onClick={handleCancel}
-              className={`${buttonBase} bg-black/20`}
+              className={`${buttonBase} bg-black/5 border ${typeDuration === "60" ? "border-brand-sage text-brand-sage" : "border-brand-ocean text-brand-ocean"}`}
             >
               Cancel
             </button>
@@ -164,8 +164,8 @@ export default function BookingModal({
               type="submit"
               className={`${buttonBase} ${
                 typeDuration === "60"
-                  ? "bg-[#7cac5b]"
-                  : "bg-[#6db0d4ec]"
+                  ? "bg-brand-sage text-white"
+                  : "bg-brand-ocean text-white"
               }`}
             >
               Book Now

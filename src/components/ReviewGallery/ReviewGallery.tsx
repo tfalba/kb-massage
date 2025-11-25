@@ -52,7 +52,7 @@ export default function ReviewGallery({
 
   return (
     <section className="flex flex-col items-start bg-brand-sand py-8">
-      <h2 className="pl-[4vw] font-montserrat text-[clamp(1.8rem,2.6vw,3rem)] font-medium text-brand-earth">
+      <h2 className="pl-[4vw] font-montserrat text-[clamp(1.8rem,2.6vw,3rem)] font-200 text-brand-earth">
         Client Testimonials
       </h2>
 
