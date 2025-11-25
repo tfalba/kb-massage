@@ -1,0 +1,34 @@
+.rdp-root {
+    --rdp-accent-color: #7cac5b !important;
+    --rdp-today-color: #7cac5b !important;
+    --rdp-selected-border: 2px solid #7cac5b;
+    --rdp-day_button-height: 50px;
+    --rdp-day_button-width: 50px;
+    --rdp-selected-border-radius: 50px !important;
+    --rdp-border-radius: 50px !important;
+  }
+
+  .rdp-weekdays {
+    font-size: calc(8px + 1vw);
+  }
+
+  .rdp-day_button {
+    font-size: calc(8px + 1vw) !important;
+  }
+
+  .rdp-day_button .rdp-selected {
+    border: var(--rdp-selected-border);
+    border-radius: var(--rdp-selected-border-radius)
+  }
+
+  .rdp-month_caption {
+    font-family: "Montserrat";
+    font-size: calc(10px + 1vw) !important;
+    font-weight: 400 !important;
+    height: 50px !important;
+  }
+
+  .rdp-caption_label {
+    font-family: "Montserrat";
+    z-index: unset !important;
+  }

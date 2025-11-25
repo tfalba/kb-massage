@@ -3,12 +3,12 @@ import headshot from "../assets/kara-headshot5.jpeg";
 
 export default function Footer() {
   return (
-    <footer>
+    <footer className="flex justify-between items-center bg-brand-earth text-brand-cream px-[2vw] pt-[2vw] pb-[2vw] ">
       <img className="logo" src={logo} alt="kb logo" loading="lazy" />
 
       <div className="flex flex-col items-end justify-center">
         <img
-          className="Footer-image flex flex-col aic"
+          className="flex flex-col items-center w-[min(40vw,200px)]"
           src={headshot}
           alt="kara bazemore"
           loading="lazy"
@@ -17,3 +17,4 @@ export default function Footer() {
     </footer>
   );
 }
+

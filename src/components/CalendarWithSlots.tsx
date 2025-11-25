@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
+import "../day-picker.css";
 import { HOURS, nycTime, nyDayKey } from "../helpers/eventFormatter";
 import BookingModal from "./BookingModal/BookingModal";
 import { useAvailability } from "../api";
@@ -100,8 +101,8 @@ export default function CalendarWithSlots({
   // Slots just for the selected day
   const daySlots = useMemo(() => {
     if (!selected) return [];
-    const startDelay = new Date(Date.now() + HOURS(2))
-    
+    const startDelay = new Date(Date.now() + HOURS(2));
+ 
     const key = nyDayKey(selected.toISOString());
     return slots
       .filter((s) => new Date(s.start_time) > startDelay)
@@ -115,9 +116,16 @@ export default function CalendarWithSlots({
     } else return false;
   }, [loading1, loading2, error1, error2]);
 
+  const buttonBase =
+    "rounded-lg border px-3 py-2 font-belleza text-[clamp(0.9rem,1.1vw,1.3rem)] text-white transition duration-150 hover:-translate-y-[1px]  hover:shadow-md";
+  const primaryButton = "border-gray-200 bg-brand-sage/80 hover:bg-brand-sage"
+    const secondaryButton = "border-[#5dacd6] bg-brand-ocean hover:bg-brand-ocean/80 hover:border-brand-ocean"
+
+    if (!type) return;
+
   return (
-    <section className="cal-slots flex flex-wrap jcc">
-      <div className="cal">
+    <section className="flex flex-wrap justify-center gap-6 px-[2vw] py-[3vw]">
+      <div className="rounded-[18px] bg-white p-[2vw] shadow-lg">
         <DayPicker
           mode="single"
           selected={selected}
@@ -145,15 +153,19 @@ export default function CalendarWithSlots({
         />
       </div>
 
-      <div className="slots flex flex-col">
-        {(loading1 || loading2) && <p>Loading availability…</p>}
-        {error1 && <p style={{ color: "crimson" }}>{error1}</p>}
-        {error2 && <p style={{ color: "crimson" }}>{error2}</p>}
+      <div className="flex min-w-[45%] flex-1 flex-col gap-4 rounded-[18px] bg-white p-[3vw] shadow-lg">
+        {(loading1 || loading2) && (
+          <p className="font-montserrat text-brand-forest/80">
+            Loading availability…
+          </p>
+        )}
+        {error1 && <p className="text-sm text-red-600">{error1}</p>}
+        {error2 && <p className="text-sm text-red-600">{error2}</p>}
 
         {notLoadOrError && (
-          <div className="dc-nav-cont jcc aic">
+          <div className="flex items-center justify-center gap-4 border-b border-brand-sage/40 pb-3">
             <button
-              className="dc-nav m0"
+              className="text-[2rem] text-brand-forest transition disabled:opacity-30"
               onClick={goPrev}
               disabled={
                 !selected ||
@@ -164,11 +176,11 @@ export default function CalendarWithSlots({
             >
               ‹
             </button>
-            <div className="dc-title flex flex-col m0 fs-main">
+            <div className="text-center font-montserrat text-[clamp(1rem,1.4vw,1.8rem)] text-brand-earth">
               {selected?.toLocaleDateString()}
             </div>
             <button
-              className="dc-nav m0"
+              className="text-[2rem] text-brand-forest transition disabled:opacity-30"
               onClick={goNext}
               aria-label="Next day"
             >
@@ -177,20 +189,22 @@ export default function CalendarWithSlots({
           </div>
         )}
         {notLoadOrError && !selected && (
-          <p>Select a date on the calendar to see available times.</p>
+          <p className="font-montserrat text-brand-earth">
+            Select a date on the calendar to see available times.
+          </p>
         )}
         {notLoadOrError && selected && daySlots.length === 0 && (
-          <p>No times available for this day.</p>
+          <p className="font-montserrat text-brand-earth">
+            No times available for this day.
+          </p>
         )}
         {notLoadOrError && selected && daySlots.length > 0 && (
-          <ul className="slot-list flex flex-wrap jcc m0">
+          <ul className="flex flex-wrap justify-center gap-3">
             {daySlots.map((s, i) => (
               <li key={i}>
                 <button
-                  className={`${
-                    type.duration === "60"
-                      ? "slot-btn ff-b"
-                      : "slot-btn slot-btn-sec ff-b"
+                  className={`${buttonBase} ${
+                    type.duration === "60" ? primaryButton : secondaryButton
                   }`}
                   onClick={() => {
                     setOpen(true);

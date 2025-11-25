@@ -16,9 +16,9 @@ export default function SimpleModal({
       <button
         onClick={openModal}
         className="bg-brand-sage text-white"
-        style={{ height: "calc(max(12vw, 12vh, 105px))" }}
+        style={{ height: "calc(max(12vw, 14vh, 105px))" }}
       >
-        <span className="grid w-[max(5vw,5vh)] place-content-center font-montserrat text-[clamp(0.9rem,1vw,1.1rem)] font-semibold tracking-widest text-white [writing-mode:vertical-rl]">
+        <span className="grid w-[max(5vw,5vh)] place-content-center font-montserrat text-[clamp(1rem,1.2vw,1.6rem)] font-semibold tracking-widest text-white [writing-mode:vertical-rl]">
           Book Now
         </span>
       </button>
