@@ -88,6 +88,38 @@
     filter: drop-shadow(0 0 2em #61dafbaa);
   }
 
+  @keyframes spinX3 {
+    from {
+      transform: rotateX(0deg);
+    }
+
+    to {
+      transform: rotateX(360deg);
+    }
+  }
+
+  .spin-y-3 {
+    display: inline-block;
+    animation: spinX3 3s ease-in-out forwards;
+    transform-style: preserve-3d;
+  }
+
+  @media (min-width: 640px) {
+    @keyframes spinY3 {
+      from {
+        transform: rotateY(0deg);
+      }
+
+      to {
+        transform: rotateY(360deg);
+      }
+    }
+
+    .spin-y-3 {
+      animation: spinY3 3s ease-in-out forwards;
+    }
+  }
+
   @keyframes logo-spin {
     from {
       transform: rotate(0deg);
@@ -103,76 +135,6 @@
       animation: logo-spin infinite 20s linear;
     }
   }
-
-@keyframes spinX3 {
-  from {
-    transform: rotateX(0deg);
-  }
-
-  to {
-    transform: rotateX(360deg);
-  }
-
-  /* 2× 360° */
-}
-
-.spin-y-3 {
-  display: inline-block;
-  animation: spinX3 3s ease-in-out forwards;
-
-  transform-style: preserve-3d;
-}
-
-@media (min-width: 640px) {
-  .spin-y-3 {
-    animation: spinY3 3s ease-in-out forwards;
-  }
-}
-
-@keyframes spinY3 {
-  from {
-    transform: rotateY(0deg);
-  }
-
-  to {
-    transform: rotateY(360deg);
-  }
-
-  /* 2× 360° */
-}
-
-.dc-title {
-  text-align: center;
-}
-
-.dc-nav-cont {
-  display: flex;
-  padding-bottom: 2vw;
-}
-
-.dc-nav {
-  border: none;
-  background: none;
-  font-size: calc(10px + 2vw);
-  height: auto;
-  width: auto;
-  padding: 0 3vw;
-  cursor: pointer;
-}
-
-.dc-nav:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.dc-nav:hover {
-  border: none;
-  background: none;
-}
-
-.dc-nav:focus {
-  outline: none -webkit-focus-ring-color;
-}
 
 .hero-banner {
   position: relative;
