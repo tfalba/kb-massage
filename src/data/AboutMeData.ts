@@ -1,31 +1,31 @@
 export const aboutMe = [
     {
     title: "Licensed Massage Therapist",
-    content: "I spent years teaching students how to understand the complexities of economics. Today, I bring that same passion for clear, empowering guidance to the mortgage world. Whether you're buying your first home, co-purchasing with a loved one, or exploring a reverse mortgage, I’m here to make the process easier, clearer, and a whole lot less intimidating."
+    content: "I spent years studying anatomy, movement, and the science of touch before opening my own wellness studio. Today I blend clinical knowledge with a warm, grounded presence to help clients unwind from stress, recover from injury, and reconnect with their bodies."
     },
     {
     title: "Why I Do This Work",
-    content: "Too many people feel overwhelmed—or worse, misled—when it comes to financing a home. I believe everyone deserves to understand what they're signing up for. That’s why I take the time to explain your options in everyday language, answer your questions thoroughly, and help you make confident, well-informed decisions.",
+    content: "Too many people carry pain and tension because they feel they have to push through it. I believe your body deserves consistent, compassionate care. I take the time to understand your lifestyle, your stressors, and your goals so every session supports deep healing rather than a quick fix.",
     },
      {
     title: "My Personal Journey",
-    content: "I’ve moved several times myself—twice buying homes with my former husband, then renting for a few years before purchasing a home on my own to raise my three children. Now that they’re growing up and becoming more independent, I’m looking to downsize or create shared ownership opportunities with both my current home and future secondary properties. These personal experiences give me deep empathy for the transitions, questions, and opportunities that come with each stage of homeownership.",
+    content: "My own wellness journey began after years of juggling parenting, caretaking, and a demanding job that left my body exhausted. Massage therapy helped me heal, sparked my curiosity, and ultimately inspired a career change. Those experiences keep me empathetic to clients navigating pain, burnout, or major life transitions.",
     },
      {
     title: "What Sets Me Apart",
-    content: "I’m a former professor, so education is at the heart of everything I do. I work one-on-one with every client—no passing you off to assistants or call centers. I take a calm, non-salesy approach focused on your long-term financial well-being.",
+    content: "I’m endlessly curious, so education is still at the heart of everything I do. I only book one client at a time, customize every treatment plan, and communicate clearly about what your body needs and how to support it at home. Expect a calm, grounded session without any sales pitches—just care.",
     },
      {
     title: "What You Can Expect",
-    content: "Clear explanations without the jargon. Personalized mortgage solutions tailored to your life. A trustworthy guide from start to finish.",
+    content: "Clear communication about your treatment plan, targeted techniques rooted in evidence-based bodywork, and a relaxing environment where you can truly let go. Every session ends with simple self-care tips to extend the benefits between visits.",
     },
      {
     title: "My Philosophy & Promise",
-    content: "Homeownership is one of the most meaningful financial and emotional milestones a person can reach. I believe it should be accessible, understandable, and empowering—not intimidating or overwhelming. I promise to: Treat every client with care, honesty, and respect. Provide patient, jargon-free education every step of the way. Focus on what’s best for your long-term goals—not just a quick transaction. Be your steady guide from first conversation to closing and beyond",
+    content: "Healing should feel accessible, supportive, and never rushed. I promise to treat you with care and respect, use techniques that honor your comfort level, explain what I’m doing in clear language, and focus on long-term wellbeing—not just immediate relief. Together we’ll create sustainable routines that help you feel your best.",
     },
       {
     title: "Let’s Talk",
-    content: "Whether you're navigating this process for the first time or the fifth, I’ll meet you where you are and help you move forward with clarity and confidence.",
+    content: "Whether you need stress relief, prenatal support, or help easing chronic pain, I’ll meet you where you are and design a plan that fits your life. Reach out when you’re ready—I’d love to help you feel grounded and renewed.",
     },
 
 ]
