@@ -24,7 +24,7 @@ export default function AccordionModal({
   const colorClass =
     slideColorThemes[idx % slideColorThemes.length] ?? "bg-brand-forest";
   const containerBase =
-    "flex top-0 h-auto flex-col flex-1 transition-accordion duration-[850ms] ease-accordion min-h-auto sm:h-[min(630px,140vh)] sm:max-h-[800px] md:flex-row";
+    "flex top-0 h-auto flex-col flex-1 transition-accordion duration-[850ms] ease-accordion sm:h-[min(630px,140vh)] sm:max-h-[800px] md:flex-row";
   const containerState = isOpen ? "flex-[12]" : "";
   const panelAnimation =
     prevOpen > idx
