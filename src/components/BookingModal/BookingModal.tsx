@@ -1,5 +1,5 @@
 import Modal from "react-modal";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { bookAppointment } from "../../api";
 import { useModal } from "../../context/useModal";
 import { groupBookingIntoStandard } from "../../helpers/eventFormatter";
@@ -24,8 +24,16 @@ export default function BookingModal({
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const { closeModal } = useModal();
+  const { closeModal, scrollOverlayToTop } = useModal();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const modalScrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (open) {
+      modalScrollRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+      scrollOverlayToTop();
+    }
+  }, [open, scrollOverlayToTop]);
 
   // IMPORTANT: rootElement must be a real DOM node in your app (e.g., #root)
   //   const rootEl = document.getElementById("root")!;
@@ -79,11 +87,12 @@ export default function BookingModal({
 
   return (
     <div
-      className="fixed inset-0 z-[1000] flex justify-end bg-black/40"
+      className="fixed inset-0 z-[1000] min-h-full h-fit flex justify-end bg-black/40"
       onClick={handleCancel}
     >
       <div
-        className="flex max-h-screen w-full max-w-[480px] flex-col items-center overflow-y-auto border-l border-brand-sage/30 bg-gradient-to-b from-white via-brand-cream to-brand-mist px-[2vw] pb-[4vw] pt-[2vw] shadow-booking-panel animate-booking-slide-in sm:px-8"
+        ref={modalScrollRef}
+        className="flex min-h-full h-fit w-full max-w-[480px] flex-col items-center overflow-y-auto border-l border-brand-sage/30 bg-gradient-to-b from-white via-brand-cream to-brand-mist px-[2vw] pb-[6vw] pt-[2vw] shadow-booking-panel animate-booking-slide-in sm:px-8"
         onClick={(e) => e.stopPropagation()}
       >
         <h2 className="m-0 flex w-full items-center justify-between font-montserrat text-[clamp(1.2rem,2vw,2.2rem)] text-brand-forest">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Modal from "react-modal";
 import { useModal } from "../../context/useModal";
 
@@ -9,7 +9,17 @@ export default function SimpleModal({
 }: {
   children: React.ReactNode;
 }) {
-  const { isOpen, openModal, closeModal } = useModal();
+  const { isOpen, openModal, closeModal, registerScrollContainer } = useModal();
+  const modalScrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      registerScrollContainer(modalScrollRef.current);
+    } else {
+      registerScrollContainer(null);
+    }
+    return () => registerScrollContainer(null);
+  }, [isOpen, registerScrollContainer]);
 
   return (
     <div className="fixed right-0 top-0">
@@ -29,7 +39,8 @@ export default function SimpleModal({
           onClick={closeModal}
         >
           <div
-            className="flex max-h-screen w-full max-w-[1400px] flex-col overflow-y-auto bg-white shadow-accordion-panel animate-booking-slide-in"
+            ref={modalScrollRef}
+            className="flex max-h-screen w-full max-w-[1400px] flex-col overflow-y-auto shadow-accordion-panel animate-booking-slide-in"
             onClick={(e) => e.stopPropagation()}
           >
             {children}
