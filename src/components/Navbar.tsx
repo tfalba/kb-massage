@@ -8,7 +8,7 @@ export default function Navbar() {
   const activeClass = "font-semibold text-white";
 
   return (
-    <nav className="flex h-[max(12vw,14vh,105px)] w-full items-center justify-between bg-brand-forest px-[2vw] pr-[max(65px,9vw)]">
+    <nav className="flex h-[max(12vw,14vh,110px)] w-full items-center justify-between bg-brand-forest px-[2vw] pr-[max(65px,9vw)]">
       <img
         className="logo w-[clamp(135px,20vw,220px)]"
         src={logo}
