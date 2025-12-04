@@ -41,7 +41,7 @@ export default function Services() {
             >
               <article className="m-[2vw] flex flex-col items-center gap-4 rounded-[14px] bg-brand-cream p-[2vw] text-brand-earth shadow-md motion-safe:animate-service-text sm:flex-row md:flex-col lg:flex-row">
                 <div className="flex w-auto flex-1 flex-col">
-                  <div className={`${idx===0 || idx===4 ? "aspect-[1]" : "aspect-[3/2]"} "overflow-hidden"`}>
+                  <div className={`${idx===0 || idx===4 ? "aspect-[1]" : "aspect-[3/2]"}`}>
                     <img
                       className={`h-full w-full p-[1vw] object-contain ${
                         service.name === "Sweedish Massage"
