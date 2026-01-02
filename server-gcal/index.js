@@ -115,6 +115,29 @@ oauth2Client.on("tokens", async (tokens) => {
   }
 });
 
+// Periodically refresh access tokens so availability works after long idle periods.
+const TOKEN_REFRESH_INTERVAL_MS = Number(process.env.TOKEN_REFRESH_INTERVAL_MS || 10 * 60 * 1000);
+const TOKEN_REFRESH_SKEW_MS = Number(process.env.TOKEN_REFRESH_SKEW_MS || 5 * 60 * 1000);
+
+async function refreshTokensIfNeeded() {
+  try {
+    const creds = oauth2Client.credentials || {};
+    if (!creds.refresh_token) return;
+
+    const expiryMs = Number(creds.expiry_date || 0);
+    const nowMs = Date.now();
+    const shouldRefresh = !expiryMs || expiryMs - nowMs <= TOKEN_REFRESH_SKEW_MS;
+    if (!shouldRefresh) return;
+
+    await oauth2Client.getAccessToken();
+  } catch (e) {
+    console.error("Token refresh check failed:", e);
+  }
+}
+
+setInterval(refreshTokensIfNeeded, TOKEN_REFRESH_INTERVAL_MS);
+refreshTokensIfNeeded();
+
 function getAuthedCalendar() {
   // If you want, guard here for missing tokens:
   if (!oauth2Client.credentials?.refresh_token) throw new Error("Not authorized with Google.");
