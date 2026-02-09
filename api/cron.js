@@ -13,7 +13,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    const resp = await fetch(`${serverUrl.replace(/\\/$/, '')}/gcal/cron/refresh`, {
+    const baseUrl = serverUrl.endsWith('/') ? serverUrl.slice(0, -1) : serverUrl;
+    const resp = await fetch(`${baseUrl}/gcal/cron/refresh`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${process.env.GCAL_CRON_SECRET}`,
