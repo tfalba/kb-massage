@@ -55,6 +55,14 @@ Frontend (`.env`):
 VITE_API_GCAL=http://localhost:4001/gcal
 ```
 
+Cron (root `.env` or Vercel env):
+
+```bash
+CRON_SECRET=your_cron_secret
+GCAL_CRON_SECRET=your_gcal_cron_secret
+GCAL_SERVER_URL=https://your-gcal-server.example.com
+```
+
 Backend (`server-gcal/.env`):
 
 ```bash
@@ -64,7 +72,12 @@ GOOGLE_REDIRECT_URI=http://localhost:4001/gcal/oauth2callback
 GOOGLE_CALENDAR_ID=your_calendar_id
 TIMEZONE=America/New_York
 BUSINESS_HOURS_JSON=[{"dow":[1,2,3,4,5],"start":"09:00","end":"17:00"}]
+GCAL_CRON_SECRET=your_gcal_cron_secret
 ```
+
+Backend example file:
+
+- `server-gcal/.env.example`
 
 3. **Run both servers locally**
 

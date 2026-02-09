@@ -49,6 +49,7 @@ const {
 
   SLOT_PADDING_MIN = "10",
   BUSINESS_HOURS_JSON = "[]",
+  GCAL_CRON_SECRET,
 } = process.env;
 
 
@@ -142,6 +143,19 @@ function getAuthedCalendar() {
   // If you want, guard here for missing tokens:
   if (!oauth2Client.credentials?.refresh_token) throw new Error("Not authorized with Google.");
   return google.calendar({ version: "v3", auth: oauth2Client });
+}
+
+function requireCronAuth(req, res) {
+  if (!GCAL_CRON_SECRET) {
+    res.status(500).json({ error: "GCAL_CRON_SECRET not configured" });
+    return false;
+  }
+  const authHeader = req.headers?.authorization || "";
+  if (authHeader !== `Bearer ${GCAL_CRON_SECRET}`) {
+    res.status(401).json({ error: "Unauthorized" });
+    return false;
+  }
+  return true;
 }
 // In-memory token storage for demo — replace with DB in prod.
 // let TOKENS = null;
@@ -349,6 +363,26 @@ app.get("/gcal/auth/status", async (_req, res) => {
     hasRefreshToken: Boolean(saved.refresh_token),
     expiryISO: saved.expiry_date ? new Date(saved.expiry_date).toISOString() : null,
   });
+});
+
+// Cron keepalive: refresh access token on schedule
+app.post("/gcal/cron/refresh", async (req, res) => {
+  if (!requireCronAuth(req, res)) return;
+  try {
+    if (!oauth2Client.credentials?.refresh_token) {
+      return res.status(409).json({ error: "No refresh token saved" });
+    }
+    await oauth2Client.getAccessToken();
+    res.json({
+      ok: true,
+      expiryISO: oauth2Client.credentials?.expiry_date
+        ? new Date(oauth2Client.credentials.expiry_date).toISOString()
+        : null,
+    });
+  } catch (e) {
+    console.error("cron refresh error", e);
+    res.status(500).json({ error: "Failed to refresh tokens" });
+  }
 });
 
 // Disconnect (revoke) and delete tokens
