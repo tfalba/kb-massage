@@ -15,8 +15,6 @@ dayjs.extend(utc); dayjs.extend(tz);
 dayjs.extend(isSameOrBefore);
 dayjs.extend(isSameOrAfter);
 
-require("dotenv").config();
-
 const app = express();
 const allowedOrigins = [
   "http://localhost:5173",               // local dev
@@ -42,13 +40,9 @@ const {
   GOOGLE_REDIRECT_URI,
   GOOGLE_CALENDAR_ID = "primary",
   TIMEZONE = "America/New_York",
-  SLOT_DURATION_MIN = "60",
-    SLOT_STEP_MIN = "30",
+  SLOT_STEP_MIN = "30",
   BUFFER_BEFORE_MIN = "0",
   BUFFER_AFTER_MIN = "10",
-
-  SLOT_PADDING_MIN = "10",
-  BUSINESS_HOURS_JSON = "[]",
   GCAL_CRON_SECRET,
 } = process.env;
 
@@ -72,7 +66,8 @@ async function loadTokens() {
   try {
     const raw = await fsp.readFile(TOKENS_PATH, "utf8");
     return JSON.parse(raw);
-  } catch (e) {
+  } catch (_err) {
+    console.log("No existing tokens found or failed to read/parse, starting fresh.", _err);
     return {}; // no file yet or invalid JSON
   }
 }
@@ -321,7 +316,6 @@ app.get("/gcal/availability", async (req, res) => {
     }
 
     // 5) Generate candidate slots: 1h duration, 30min step
-    // const durationMin = Number(SLOT_DURATION_MIN);
     const durationMin = Number(duration);
     const stepMin = Number(SLOT_STEP_MIN);
     const now = dayjs();
@@ -395,7 +389,12 @@ app.post("/gcal/auth/disconnect", async (req, res) => {
     if (creds?.refresh_token) {
       await oauth2Client.revokeToken(creds.refresh_token);
     }
-    try { await fsp.unlink(TOKENS_PATH); } catch {}
+    try {
+      await fsp.unlink(TOKENS_PATH);
+    } catch (_err) {
+      console.log("Failed to delete tokens file:", _err);
+      // ignore missing file or unlink errors
+    }
     oauth2Client.setCredentials({});
     res.json({ ok: true });
   } catch (e) {
